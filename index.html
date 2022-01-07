@@ -1,0 +1,109 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Main Style -->
+    <link rel="stylesheet" href="Spiraldex.css" />
+    <!-- normalize -->
+    <link rel="stylesheet" href="normalize.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+  </head>
+  <body>
+    <div class="time">
+      <div class="spiraldex">
+        <div class="clock-arrow-3-5"></div>
+        <div class="clock-arrow-4-6"></div>
+        <div class="circle1">
+          <div class="stick1"></div>
+          <div class="stick2"></div>
+          <div class="stick3"></div>
+          <div class="stick4"></div>
+          <div class="stick5"></div>
+          <div class="stick6"></div>
+          <div class="stick7"></div>
+        </div>
+        <div class="circle2">
+          <div class="c2Stick1"></div>
+          <div class="c2Stick2"></div>
+          <div class="c2Stick3"></div>
+          <div class="c2Stick4"></div>
+          <div class="c2Stick5"></div>
+          <div class="c2Stick6"></div>
+        </div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+        <div class="circle5"></div>
+        <div class="circle6"></div>
+      </div>
+    </div>
+    <div class="control-panel">
+      <form class="form">
+        <!-- Every color in the spiraldex will be added be prepend instead of using the z-index -->
+        <div class="from-to">
+          <div class="from">
+            <label for="from-hours">From</label>
+            <label for="from-hours">Hour:</label>
+            <input
+              type="text"
+              class="from-hours"
+              id="from-hours"
+              value="00"
+              maxlength="2"
+            />
+            <label for="from-minutes">Minute:</label>
+            <input
+              type="text"
+              class="from-minutes"
+              id="from-minutes"
+              value="00"
+              maxlength="2"
+            />
+            <label for="from-seconds">Second:</label>
+            <input
+              type="text"
+              class="from-seconds"
+              id="from-seconds"
+              value="00"
+              maxlength="2"
+            />
+          </div>
+          <div class="to">
+            <label for="to">To</label>
+            <input
+              type="text"
+              class="to-hours"
+              id="to"
+              value="00"
+              maxlength="2"
+            />
+            <input type="text" class="to-minutes" value="00" maxlength="2" />
+            <input type="text" class="to-seconds" value="00" maxlength="2" />
+          </div>
+          <div>
+            <input type="color" class="from-to-color" value="#03a9f4" />
+          </div>
+          <span class="add">ADD</span>
+        </div>
+        <span class="go-ring"></span>
+        <span class="go-border"></span>
+        <span class="go-btn">GO</span>
+      </form>
+    </div>
+    <span id="span"></span>
+    <div>
+      <canvas id="myChart"></canvas>
+    </div>
+    <!-- jquery -->
+    <script src="jquery-3.6.0.min.js"></script>
+    <script src="functionality.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"
+      integrity="sha512-TW5s0IT/IppJtu76UbysrBH9Hy/5X41OTAbQuffZFU6lQ1rdcLHzpU5BzVvr/YFykoiMYZVWlr/PX1mDcfM9Qg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </body>
+</html>
