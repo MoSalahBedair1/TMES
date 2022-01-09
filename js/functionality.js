@@ -2,145 +2,58 @@ $(function () {
 
   /* === Spiraldex Section === */
 
-  // Setting the width and height C1
 
-    var
-    c1 = $('.circle1'), // Get Circle1
-    c1IWidth = 5, // Setting The Intial Width of Circle1
-    c1IWidthP = c1IWidth + '%', // Adding % to Intial Width
-    c1IHeight = c1IWidth * 2, // Setting The Intial Height of Circle1
-    c1IHeightP = c1IHeight + '%'; // Adding % to Intial Height
-    
-    c1.css({
-      'width': c1IWidthP,
-      'height': c1IHeightP
-    });
-    
-    var c1HeightPx = c1.outerHeight(); // Getting The Current Height (With Borders) of Circle 1
-    
-    c1.css({
-      'border-top-left-radius': 0,
-      'border-top-right-radius': c1HeightPx,
-      'border-bottom-right-radius': c1HeightPx,
-      'border-bottom-left-radius': 0
-    });
+  class Circle {
+    constructor() {
+      this.make = function (circleName, circleWidth, noLeftSide) {
+        var
+        circleName = document.querySelector(`.${circleName}`),
+        circleWidth = circleWidth,
+        circleWidthPercent = circleWidth + '%',
+        circleHeight = circleWidth * 2,
+        circleHeightPercent = circleHeight + '%';
+        
+        circleName.style.width = `${circleWidthPercent}`;
+        circleName.style.height = `${circleHeightPercent}`;
 
-  // Setting the width and height C2
+        var 
+        circleHeightPx = circleName.getBoundingClientRect().height,
+        circleHeightPxString = circleHeightPx + 'px';
 
-    var
-    c2 = $('.circle2'), // Get Circle2
-    c2IWidth = 10, // Setting The Intial Width of Circle2
-    c2IWidthP = c2IWidth + '%', // Adding % to Intial Width
-    c2IHeight = c2IWidth * 2, // Setting The Intial Height of Circle2
-    c2IHeightP = c2IHeight + '%'; // Adding % to Intial Height
-  
-    
-    c2.css({
-      'width': c2IWidthP,
-      'height': c2IHeightP
-    });
-    
-    var c2HeightPx = c2.outerHeight(); // Getting The Current Height (With Borders) of Circle 2
-    
-    c2.css({
-      'border-top-left-radius': c2HeightPx,
-      'border-top-right-radius': 0,
-      'border-bottom-right-radius': 0,
-      'border-bottom-left-radius': c2HeightPx
-    });
+        if (noLeftSide === true) {
 
-  // Setting the width and height C3
+          circleName.style.borderTopLeftRadius = 0;
+          circleName.style.borderTopRightRadius = circleHeightPxString;
+          circleName.style.borderBottomRightRadius = circleHeightPxString;
+          circleName.style.borderBottomLeftRadius = 0;
 
-    var
-    c3 = $('.circle3'), // Get Circle3
-    c3IWidth = 15, // Setting The Intial Width of Circle3
-    c3IWidthP = c3IWidth + '%', // Adding % to Intial Width
-    c3IHeight = c3IWidth * 2, // Setting The Intial Height of Circle3
-    c3IHeightP = c3IHeight + '%'; // Adding % to Intial Height
-  
-    
-    c3.css({
-      'width': c3IWidthP,
-      'height': c3IHeightP
-    });
-    
-    var c3HeightPx = c3.outerHeight(); // Getting The Current Height (With Borders) of Circle 3
-    
-    c3.css({
-      'border-top-left-radius': 0,
-      'border-top-right-radius': c3HeightPx,
-      'border-bottom-right-radius': c3HeightPx,
-      'border-bottom-left-radius': 0
-    });
 
-  // Setting the width and height C4
+        } else {
 
-    var
-    c4 = $('.circle4'), // Get Circle4
-    c4IWidth = 20, // Setting The Intial Width of Circle4
-    c4IWidthP = c4IWidth + '%', // Adding % to Intial Width
-    c4IHeight = c4IWidth * 2, // Setting The Intial Height of Circle4
-    c4IHeightP = c4IHeight + '%'; // Adding % to Intial Height
-    
-    c4.css({
-      'width': c4IWidthP,
-      'height': c4IHeightP
-    });
-    
-    var c4HeightPx = c4.outerHeight(); // Getting The Current Height (With Borders) of Circle 4
-    
-    c4.css({
-      'border-top-left-radius': c4HeightPx,
-      'border-top-right-radius': 0,
-      'border-bottom-right-radius': 0,
-      'border-bottom-left-radius': c4HeightPx
-    });
+          circleName.style.borderTopLeftRadius = circleHeightPxString;
+          circleName.style.borderTopRightRadius = 0;
+          circleName.style.borderBottomRightRadius = 0;
+          circleName.style.borderBottomLeftRadius = circleHeightPxString;
 
-  // Setting the width and height C5
+        }
 
-    var
-    c5 = $('.circle5'),// Get Circle5
-    c5IWidth = 25,// Setting The Intial Width of Circle5
-    c5IWidthP = c5IWidth + '%',// Adding % to Intial Width
-    c5IHeight = c5IWidth * 2,// Setting The Intial Height of Circle5
-    c5IHeightP = c5IHeight + '%';// Adding % to Intial Height
-    
-    c5.css({
-      'width': c5IWidthP,
-      'height': c5IHeightP
-    });
-    
-    var c5HeightPx = c5.outerHeight(); // Getting The Current Height (With Borders) of Circle 5
-    
-    c5.css({
-      'border-top-left-radius': 0,
-      'border-top-right-radius': c5HeightPx,
-      'border-bottom-right-radius': c5HeightPx,
-      'border-bottom-left-radius': 0
-    });
+      };
+    }
+  }
 
-  // Setting the width and height C6
+let circle1New = new Circle(),
+circle2New = new Circle(),
+circle3New = new Circle(),
+circle4New = new Circle(),
+circle5New = new Circle(),
+circle6New = new Circle();
 
-    var
-    c6 = $('.circle6'), // Get Circle6
-    c6IWidth = 30, // Setting The Intial Width of Circle6
-    c6IWidthP = c6IWidth + '%', // Adding % to Intial Width
-    c6IHeight = c6IWidth * 2, // Setting The Intial Height of Circle6
-    c6IHeightP = c6IHeight + '%'; // Adding % to Intial Height
-    
-    c6.css({
-      'width': c6IWidthP,
-      'height': c6IHeightP
-    });
-    
-    var c6HeightPx = c6.outerHeight(); // Getting The Current Height (With Borders) of Circle 6
-    
-    c6.css({
-      'border-top-left-radius': c6HeightPx,
-      'border-top-right-radius': 0,
-      'border-bottom-right-radius': 0,
-      'border-bottom-left-radius': c6HeightPx
-    });
+circle1New.make('circle1', '5', true);
+circle2New.make('circle2', '10', false);
+circle3New.make('circle3', '15', true);
+circle4New.make('circle4', '20', false);
+circle5New.make('circle5', '25', true);
+circle6New.make('circle6', '30', false);
 
 
 /* === Start Control Panel Section === */
