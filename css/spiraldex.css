@@ -1,0 +1,719 @@
+/* Global Settings */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  font-family: sans-serif;
+}
+
+/* Spirladex Section */
+
+.time {
+  width: 708px;
+  height: 708px;
+  border: 4px dashed #ccc;
+  display: inline-block;
+  margin: 20px 30px 20px 20px;
+  position: relative;
+}
+
+.spiraldex {
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.clock-arrow-3-5 {
+  z-index: 100;
+  width: 1px;
+  height: 96.75px;
+  position: absolute;
+  transform: rotate(0deg);
+  transform-origin: bottom;
+  left: 47.55%;
+  top: 50%;
+  margin-top: -96.75px;
+  background-image: linear-gradient(0deg, #1a2a6c, #b21f1f, #fdbb2d);
+}
+
+.clock-arrow-3-5::before {
+  content: "\f0d8";
+  font-family: FontAwesome;
+  color: #fdbb2d;
+  position: absolute;
+  top: -8.65px;
+  right: -4px;
+}
+
+.clock-arrow-4-6 {
+  z-index: 100;
+  width: 1px;
+  height: 127px;
+  position: absolute;
+  transform: rotate(0deg);
+  transform-origin: bottom;
+  left: 47.55%;
+  top: 40.6%;
+  margin-top: -96.75px;
+  background-image: linear-gradient(0deg, #1a2a6c, #b21f1f, #fdbb2d);
+  display: none;
+}
+
+.clock-arrow-4-6::before {
+  content: "\f0d8";
+  font-family: FontAwesome;
+  color: #fdbb2d;
+  position: absolute;
+  top: -8.65px;
+  right: -4px;
+}
+
+/* Circles */
+
+.circle1,
+.circle2,
+.circle3,
+.circle4,
+.circle5,
+.circle6 {
+  background: #fff;
+  border: 3px solid black;
+  position: relative;
+  border-left: none;
+}
+
+.circle1 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background: #fff;
+}
+
+.circle2 {
+  top: 165.9px;
+  left: 249.5px;
+  border-right: none;
+  border-left: 3px solid #000;
+  background-color: #fff;
+}
+
+.circle3 {
+  right: -365.3px;
+  top: 232.5px;
+  transform: translate(-48%, -100.1%);
+  overflow: hidden;
+  transition: transform 1s;
+}
+
+.circle4 {
+  bottom: 35.07%;
+  left: 28%;
+  overflow: hidden;
+  z-index: -1;
+  transform: rotate(0);
+  border: 3px solid black;
+  border-right: none;
+}
+
+.circle5 {
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-8.85%, -50.2%);
+  overflow: hidden;
+  z-index: -1;
+}
+
+.circle6 {
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-107.3%, -141.84%);
+  z-index: -2;
+  overflow: hidden;
+  border: 3px solid black;
+  border-right: none;
+}
+
+/* Sticks And Numbers */
+
+/* Circle1 Sticks and Numbers [0,1,2,3,4,5,6,12,13,14,15,16,17,18]*/
+
+.stick1,
+.stick2,
+.stick3,
+.stick4,
+.stick5,
+.stick6,
+.stick7,
+.c2Stick1,
+.c2Stick2,
+.c2Stick3,
+.c2Stick4,
+.c2Stick5,
+.c2Stick6 {
+  width: 2px;
+  background-color: #000;
+  position: absolute;
+}
+
+.stick1::before,
+.stick2::before,
+.stick3::before,
+.stick4::before,
+.stick5::before,
+.stick6::before,
+.stick7::before,
+.c2Stick1::before,
+.c2Stick2::before,
+.c2Stick3::before,
+.c2Stick4::before,
+.c2Stick5::before,
+.c2Stick6::before {
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  position: absolute;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.stick1::before,
+.stick2::before,
+.stick3::before,
+.stick4::before,
+.stick5::before,
+.stick6::before,
+.stick7::before {
+  font-size: 9px;
+  width: 20px;
+  height: 20px;
+}
+
+.c2Stick1::before,
+.c2Stick2::before,
+.c2Stick3::before,
+.c2Stick4::before,
+.c2Stick5::before {
+  font-size: 11px;
+  width: 23px;
+  height: 23px;
+}
+
+.stick1::after,
+.stick2::after,
+.stick3::after,
+.stick4::after,
+.stick5::after,
+.stick6::after,
+.stick7::after,
+.c2Stick1::after,
+.c2Stick2::after,
+.c2Stick3::after,
+.c2Stick4::after,
+.c2Stick5::after {
+  font-weight: bold;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #000;
+  text-align: center;
+}
+
+.stick1::after,
+.stick2::after,
+.stick3::after,
+.stick4::after,
+.stick5::after,
+.stick6::after,
+.stick7::after {
+  font-size: 8px;
+  width: 13px;
+  height: 13px;
+}
+
+.c2Stick1::after,
+.c2Stick2::after,
+.c2Stick3::after,
+.c2Stick4::after,
+.c2Stick5::after {
+  font-size: 8px;
+  width: 15px;
+  height: 15px;
+}
+
+.stick1 {
+  height: 133px;
+  top: -135px;
+  transform: translateX(-0.5%);
+}
+
+.stick1::before {
+  content: "12";
+  line-height: 20px;
+  top: -9px;
+  right: -9px;
+}
+
+.stick1::after {
+  content: "0";
+  line-height: 10px;
+  bottom: 0;
+  transform: translate(-40%, 50%);
+  width: 10px;
+  height: 10px;
+}
+
+.stick2 {
+  height: 135px;
+  top: -123px;
+  right: -20.84px;
+  transform: rotate(30deg);
+}
+
+.stick2::before {
+  content: "13";
+  line-height: 20px;
+  top: -9px;
+  right: -9px;
+  transform: rotate(-30deg);
+}
+
+.stick2::after {
+  content: "1";
+  line-height: 14px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-30deg);
+}
+
+.stick3 {
+  height: 134px;
+  top: -87px;
+  right: -56.84px;
+  transform: rotate(60deg);
+}
+
+.stick3::before {
+  content: "14";
+  line-height: 20px;
+  top: -9px;
+  right: -9px;
+  transform: rotate(-60deg);
+}
+
+.stick3::after {
+  content: "2";
+  line-height: 14px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-60deg);
+}
+
+.stick4 {
+  height: 136px;
+  top: -39px;
+  right: -70px;
+  transform: rotate(90deg);
+}
+
+.stick4::before {
+  content: "15";
+  line-height: 20px;
+  top: -9px;
+  right: -9px;
+  transform: rotate(-90deg);
+}
+
+.stick4::after {
+  content: "3";
+  line-height: 14px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-90deg);
+}
+
+.stick5 {
+  height: 133px;
+  top: 12px;
+  right: -57px;
+  transform: rotate(120deg);
+}
+
+.stick5::before {
+  content: "16";
+  line-height: 20.8px;
+  top: -9px;
+  right: -9px;
+  transform: rotate(-120deg);
+}
+
+.stick5::after {
+  content: "4";
+  line-height: 14px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-120deg);
+}
+
+.stick6 {
+  height: 133px;
+  top: 48px;
+  right: -21px;
+  transform: rotate(150deg);
+}
+
+.stick6::before {
+  content: "17";
+  line-height: 21px;
+  top: -9px;
+  right: -9px;
+  transform: rotate(-150deg);
+}
+
+.stick6::after {
+  content: "5";
+  line-height: 14px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-150deg);
+}
+
+.stick7 {
+  height: 133px;
+  top: 61px;
+  transform: rotate(180deg);
+}
+
+.stick7::before {
+  content: "18";
+  line-height: 21px;
+  top: -9px;
+  right: -9px;
+  transform: rotate(-180deg);
+}
+
+.stick7::after {
+  content: "6";
+  line-height: 14px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(180deg);
+}
+
+/* Circle2 Sticks and Numbers from [7,8,9,10,11,19,20,21,22,23,24] */
+
+.c2Stick1 {
+  height: 132px;
+  top: 111px;
+  right: 62px;
+  transform: rotate(210deg);
+}
+
+.c2Stick1::before {
+  content: "19";
+  line-height: 25px;
+  top: -10px;
+  right: -11px;
+  transform: rotate(-210deg);
+}
+
+.c2Stick1::after {
+  content: "7";
+  line-height: 16px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-210deg);
+}
+
+.c2Stick2 {
+  height: 132px;
+  top: 64px;
+  right: 111.16px;
+  transform: rotate(240deg);
+}
+
+.c2Stick2::before {
+  content: "20";
+  line-height: 25px;
+  top: -10px;
+  right: -11px;
+  transform: rotate(-240deg);
+}
+
+.c2Stick2::after {
+  content: "8";
+  line-height: 16px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-240deg);
+}
+
+.c2Stick3 {
+  height: 131px;
+  top: -1px;
+  right: 130.16px;
+  transform: rotate(270deg);
+}
+
+.c2Stick3::before {
+  content: "21";
+  line-height: 25px;
+  top: -10px;
+  right: -11px;
+  transform: rotate(-270deg);
+}
+
+.c2Stick3::after {
+  content: "9";
+  line-height: 16px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-270deg);
+}
+
+.c2Stick4 {
+  height: 131px;
+  top: -69px;
+  right: 111px;
+  transform: rotate(300deg);
+}
+
+.c2Stick4::before {
+  content: "22";
+  line-height: 24px;
+  top: -10px;
+  right: -11px;
+  transform: rotate(-300deg);
+}
+
+.c2Stick4::after {
+  content: "10";
+  line-height: 16px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-300deg);
+}
+
+.c2Stick5 {
+  height: 133px;
+  top: -118px;
+  right: 64px;
+  transform: rotate(330deg);
+}
+
+.c2Stick5::before {
+  content: "23";
+  line-height: 24px;
+  top: -10px;
+  right: -11px;
+  transform: rotate(-330deg);
+}
+
+.c2Stick5::after {
+  content: "11";
+  line-height: 16px;
+  bottom: 0;
+  transform: translate(-40%, 50%) rotate(-330deg);
+}
+
+.c2Stick6 {
+  height: 69px;
+  top: -136px;
+  right: -1.77px;
+}
+
+.c2Stick6::before {
+  content: "24";
+  font-size: 13px;
+  line-height: 25px;
+  top: -11px;
+  right: -11px;
+  width: 25px;
+  height: 25px;
+}
+
+/* Control Panel */
+
+.control-panel {
+  display: inline-block;
+  width: 708px;
+  height: 708px;
+  background-color: #ccc;
+  margin: 20px 20px 20px 28px;
+  position: relative;
+}
+
+.form {
+  width: 95%;
+  height: 95%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.from-to {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.from-to .from {
+  margin-bottom: 3px;
+}
+
+.from-to div label {
+  display: inline-block;
+  width: 50px;
+  user-select: none;
+  text-align: right;
+}
+
+.from label:first-of-type::before {
+  content: ":";
+  position: absolute;
+  left: 44.1%;
+}
+
+.from label:first-of-type::after {
+  content: ":";
+  position: absolute;
+  left: 71.5%;
+}
+
+.from label:nth-of-type(2) {
+  position: absolute;
+  top: -35%;
+  left: 21%;
+}
+
+.from label:nth-of-type(3) {
+  position: absolute;
+  top: -35%;
+  left: 49.5%;
+}
+
+.from label:nth-of-type(4) {
+  position: absolute;
+  top: -35%;
+  left: 76%;
+}
+
+.to label:first-of-type::before {
+  content: ":";
+  position: absolute;
+  top: 58%;
+  left: 44.1%;
+}
+
+.to label:first-of-type::after {
+  content: ":";
+  position: absolute;
+  top: 58%;
+  left: 71.5%;
+}
+
+.form input[type="text"] {
+  text-align: center;
+  width: 68px;
+  margin-right: 6px;
+}
+
+.add {
+  position: absolute;
+  top: 10%;
+  left: 103%;
+  width: 100px;
+  height: 40px;
+  text-align: center;
+  color: #fff;
+  background-color: #4caf50;
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.add:hover {
+  background-color: #4caf50d6;
+}
+
+.from-to-color {
+  position: absolute;
+  top: 130%;
+  left: 50%;
+}
+
+.go-border {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -77.5px;
+  margin-top: -77.5px;
+  /* background-image: linear-gradient(90deg, #159957, #155799); */
+  background-image: linear-gradient(90deg, #0099f7, #f11712);
+  width: 155px;
+  height: 155px;
+  border-radius: 50%;
+  animation: start-heartbeat 3.5s ease-out 1.5s infinite;
+}
+
+@keyframes start-heartbeat {
+  0% {
+    transform: scale(1);
+  }
+
+  8.333% {
+    transform: scale(0.989);
+  }
+
+  16.667% {
+    transform: scale(1);
+  }
+}
+
+.go-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 155px;
+  margin-left: -77.5px;
+  margin-top: -77.5px;
+  height: 155px;
+  border: 3px solid #ed1915;
+  border-radius: 50%;
+  animation: start-ring 3.5s linear 1.5s infinite;
+}
+
+@keyframes start-ring {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  12.5% {
+    opacity: 0;
+    transform: scale(0.995);
+  }
+
+  16.667% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+.go-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  background-color: #141526;
+  width: 150px;
+  height: 150px;
+  font-size: 50px;
+  line-height: 150px;
+  text-align: center;
+  border-radius: 50%;
+  user-select: none;
+}
