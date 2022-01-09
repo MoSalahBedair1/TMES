@@ -2,7 +2,6 @@ $(function () {
 
   /* === Spiraldex Section === */
 
-
   class Circle {
     constructor() {
       this.make = function (circleName, circleWidth, noLeftSide) {
