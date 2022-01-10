@@ -145,7 +145,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
 
   storedFromH = fromH;
 
-  window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${StartPosition + totalDeg}deg)`);num++}, 50);
+  window.setTimeout(() => {$(`.fill${num}-circle3`).css('transform',`rotate(${StartPosition + totalDeg}deg)`);num++}, 50);
 
 } else if (StartPosition < 180 && EndPosition > 180 && EndPosition <= 360) { // Start In Circle3 And End In Circle4
 
@@ -155,7 +155,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
 
   storedFromH = fromH;
 
-  window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${StartPosition + complete}deg)`)}, 50)
+  window.setTimeout(() => {$(`.fill${num}-circle3`).css('transform',`rotate(${StartPosition + complete}deg)`)}, 50)
 
   $('.circle4').prepend(`<div class='fill${num}-circle4' style='
   width: 133px;
@@ -178,7 +178,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
 
   storedFromH = fromH;
 
-  window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${StartPosition + complete}deg)`)}, 50)
+  window.setTimeout(() => {$(`.fill${num}-circle3`).css('transform',`rotate(${StartPosition + complete}deg)`)}, 50)
 
   $('.circle4').prepend(`<div class='fill${num}continued-circle4' style='
   width: 133px;
@@ -215,7 +215,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
 
   storedFromH = fromH;
 
-  window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${StartPosition + complete1}deg)`)}, 50)
+  window.setTimeout(() => {$(`.fill${num}-circle3`).css('transform',`rotate(${StartPosition + complete1}deg)`)}, 50)
 
   $('.circle4').prepend(`<div class='fill${num}continued-circle4' style='
   width: 133px;
