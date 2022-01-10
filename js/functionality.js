@@ -125,7 +125,7 @@ class Circle3Add {
       transition: transform 0.5s linear;
       transform: rotate(${StartPosition}deg);'></div>`);
 
-      $('.circle3').prepend(`<div class='fill${num}' style='
+      $('.circle3').prepend(`<div class='fill${num}-circle3' style='
       width: 99.75px;
       height: 199.5px;
       background-color: ${color};
