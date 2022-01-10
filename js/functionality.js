@@ -111,71 +111,49 @@ totalHDeg = (toM < fromM && toM == 0 && toH == fromH + 1) ? 0 : ((fromH == 0 && 
 totalDeg = totalSDeg + totalMDeg + totalHDeg,
 color = $('.from-to-color').val();
 
+class Circle3Add {
+  constructor() {
+      if (toH != storedFromH + 1) {
+      $('.circle3').prepend(`<div class='empty' style='
+      width: 99.75px;
+      height: 199.5px;
+      background-color: white;
+      position: absolute;
+      right: 100%;
+      top: -3px;
+      transform-origin: right center;
+      transition: transform 0.5s linear;
+      transform: rotate(${StartPosition}deg);'></div>`);
+
+      $('.circle3').prepend(`<div class='fill${num}' style='
+      width: 99.75px;
+      height: 199.5px;
+      background-color: ${color};
+      position: absolute;
+      right: 100%;
+      top: -3px;
+      transform-origin: right center;
+      transition: transform 0.5s linear;
+      transform: rotate(${StartPosition}deg);'></div>`);
+    }
+  }
+}
 
 if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In Circle3
 
-console.log('Start In Circle3 And End In Circle3')
-
-  if (toH != storedFromH + 1) {
-    $('.circle3').prepend(`<div class='empty' style='
-    width: 99.75px;
-    height: 199.5px;
-    background-color: white;
-    position: absolute;
-    right: 100%;
-    top: -3px;
-    transform-origin: right center;
-    transition: transform 0.5s linear;
-    transform: rotate(${StartPosition}deg);'></div>`);
-  }
+  new Circle3Add();
 
   storedFromH = fromH;
-
-  $('.circle3').prepend(`<div class='fill${num}' style='
-  width: 99.75px;
-  height: 199.5px;
-  background-color: ${color};
-  position: absolute;
-  right: 100%;
-  top: -3px;
-  transform-origin: right center;
-  transition: transform 0.5s linear;
-  transform: rotate(${StartPosition}deg);'></div>`);
 
   window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${StartPosition + totalDeg}deg)`);num++}, 50);
 
 } else if (StartPosition < 180 && EndPosition > 180 && EndPosition <= 360) { // Start In Circle3 And End In Circle4
 
-  console.log('Start In Circle3 And End In Circle4')
-
-
   var complete = 180 - StartPosition; // to complete from start position to end of the circle 1
 
-  if (toH != storedFromH + 1) {
-    $('.circle3').prepend(`<div class='empty' style='
-    width: 99.75px;
-    height: 199.5px;
-    background-color: white;
-    position: absolute;
-    right: 100%;
-    top: -3px;
-    transform-origin: right center;
-    transition: transform 0.5s linear;
-    transform: rotate(${StartPosition}deg);'></div>`);
-  }
+  new Circle3Add();
 
   storedFromH = fromH;
-
-  $('.circle3').prepend(`<div class='fill${num}' style='
-  width: 99.75px;
-  height: 199.5px;
-  background-color: ${color};
-  position: absolute;
-  right: 100%;
-  top: -3px;
-  transform-origin: right center;
-  transition: transform 0.5s linear;
-  transform: rotate(${StartPosition}deg);'></div>`);
 
   window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${StartPosition + complete}deg)`)}, 50)
 
