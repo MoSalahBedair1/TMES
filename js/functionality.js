@@ -581,6 +581,7 @@ class ClockArrow {
   })
 
   $('.clock-arrow-3-5').css({
+    'display': 'block',
     'transform':`rotate(${tDegree}deg)`
   });
   } else if (arrowPlace == 4 || arrowPlace == 6) {
@@ -595,6 +596,12 @@ class ClockArrow {
   }
   }
 }
+
+arrowClock3 = new ClockArrow();
+arrowClock4 = new ClockArrow();
+arrowClock5 = new ClockArrow();
+arrowClock6 = new ClockArrow();
+
 
 function time() {
 
@@ -613,13 +620,17 @@ time();
 if (tDegree <= 180) { // Starts At Circle 3
 
   new TDegree;
-  arrowClock3 = new ClockArrow();
 
   function ArrowInCircle3() {
-    arrowClock3.arrow(3);
 
-    if (tDegree) {
-
+    if (tDegree > 540 && tDegree <= 720) {
+      arrowClock6.arrow(6);
+    } else if (tDegree > 360 && tDegree <= 540 ) { 
+      arrowClock5.arrow(5);
+    } else if (tDegree > 180 && tDegree <= 360) {
+      arrowClock4.arrow(4);
+    } else if (tDegree <= 180) {
+      arrowClock3.arrow(3);
     }
 
     tDegree++;
@@ -627,17 +638,15 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle3();
-  setInterval(ArrowInCircle3, 100);
+  setInterval(ArrowInCircle3, 5);
 
 
-} else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle
+} else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
 
     new TDegree;
-    new ClockArrow(4);
+    arrowClock4 = new ClockArrow();
 
   function ArrowInCircle4() {
-
-
 
   }
 
@@ -647,11 +656,10 @@ if (tDegree <= 180) { // Starts At Circle 3
 } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
     new TDegree;
-    new ClockArrow(5);
+    arrowClock5 = new ClockArrow();
 
   function ArrowInCircle5() {
 
-  
   }
 
   ArrowInCircle5();
@@ -659,13 +667,11 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
-  
     new TDegree;
-    new ClockArrow(6);
+    arrowClock6 = new ClockArrow();
 
   function ArrowInCircle6() {
 
-  
 }
 
   ArrowInCircle6();
