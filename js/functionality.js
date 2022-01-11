@@ -637,16 +637,8 @@ if (tDegree <= 180) {
       function ArrowInCircle5() {
     
         new TDegree;
-      
-        $('.clock-arrow-4-6').css({
-          'display': 'none'
-        })
-      
-        $('.clock-arrow-3-5').css({
-          'height': '162.75px',
-          'top': '40%',
-          'transform':`rotate(${tDegree}deg)`
-        });
+
+        new ClockArrow(5);
       
       }
     
@@ -666,15 +658,7 @@ if (tDegree <= 180) {
 
     new TDegree;
   
-    $('.clock-arrow-4-6').css({
-      'display': 'none'
-    })
-  
-    $('.clock-arrow-3-5').css({
-      'height': '162.75px',
-      'top': '40%',
-      'transform':`rotate(${tDegree}deg)`
-    });
+    new ClockArrow(5);
   
   }
 
@@ -688,17 +672,7 @@ if (tDegree <= 180) {
 
     new TDegree;
 
-    
-  $('.clock-arrow-3-5').css({
-    'display': 'none'
-  });
-  
-  $('.clock-arrow-4-6').css({
-    'display': 'block',
-    'height':'194.8px',
-    'top': '30.4%',
-    'transform': `rotate(${tDegree}deg)`
-  })
+    new ClockArrow(6);
   
 }
 
