@@ -555,36 +555,11 @@ t,
 tHDegree,
 tMDegree,
 tSDegree,
-tDegree,
-testVar = 181; // ============================================ Delete After the test
+tDegree;
+// testVar = 181; // ============================================ Delete After the test
 
-function time() {
-
-d = new Date();
-h = d.getHours();
-m = d.getMinutes();
-s = d.getSeconds();
-
-t = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-tHDegree = parseInt(`${h < 10 ? '0' : ''}${h}`) * 30;
-tMDegree = parseInt(`${m < 10 ? '0' : ''}${m}`) * 0.5;
-tSDegree = parseInt(`${s < 10 ? '0' : ''}${s}`) * 0.0083333333333333;
-tDegree = tHDegree + tMDegree + tSDegree;
-
-span.textContent = t
-
-};
-
-time();
-
-console.log(tDegree);
-
-// checking where the arrow is
-
-if (tDegree <= 180) {
-
-  function ArrowInCircle3() {
-
+class TDegree {
+  constructor() {
     d = new Date();
     h = d.getHours();
     m = d.getMinutes();
@@ -594,7 +569,27 @@ if (tDegree <= 180) {
     tMDegree = m * 0.5;
     tSDegree = s * 0.0083333333333333;
     tDegree = tHDegree + tMDegree + tSDegree;
-  
+  }
+}
+
+function time() {
+
+  new TDegree;
+
+t = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+
+span.textContent = t
+
+};
+
+time();
+
+// checking where the arrow is
+
+if (tDegree <= 180) {
+
+  function ArrowInCircle3() {
+
     $('.clock-arrow-4-6').css({
       'display': 'none'
     })
@@ -612,17 +607,7 @@ if (tDegree <= 180) {
 
   function ArrowInCircle4() {
 
-    d = new Date();
-    h = d.getHours();
-    m = d.getMinutes();
-    s = d.getSeconds();
-  
-    tHDegree = h * 30;
-    tMDegree = m * 0.5;
-    tSDegree = s * 0.0083333333333333;
-    // tDegree = tHDegree + tMDegree + tSDegree;
-    
-    testVar++;
+    new TDegree;
     
 
     $('.clock-arrow-3-5').css({
@@ -632,23 +617,14 @@ if (tDegree <= 180) {
     $('.clock-arrow-4-6').css({
       'display': 'block',
       // 'transform': `rotate(${tDegree}deg)`
-      'transform': `rotate(${testVar}deg)`
+      'transform': `rotate(${tDegree}deg)`
     });
 
-    if (testVar > 360 && testVar <= 540 ) {
+    if (tDegree > 360 && tDegree <= 540 ) {
 
       function ArrowInCircle5() {
     
-        d = new Date();
-        h = d.getHours();
-        m = d.getMinutes();
-        s = d.getSeconds();
-      
-        tHDegree = h * 30;
-        tMDegree = m * 0.5;
-        tSDegree = s * 0.0083333333333333;
-        // tDegree = tHDegree + tMDegree + tSDegree;
-        testVar++;
+        new TDegree;
       
         $('.clock-arrow-4-6').css({
           'display': 'none'
@@ -658,7 +634,7 @@ if (tDegree <= 180) {
           'height': '162.75px',
           'top': '40%',
           // 'transform':`rotate(${tDegree}deg)`
-          'transform':`rotate(${testVar}deg)`
+          'transform':`rotate(${tDegree}deg)`
         });
       
       }
@@ -677,15 +653,7 @@ if (tDegree <= 180) {
 
   function ArrowInCircle5() {
 
-    d = new Date();
-    h = d.getHours();
-    m = d.getMinutes();
-    s = d.getSeconds();
-  
-    tHDegree = h * 30;
-    tMDegree = m * 0.5;
-    tSDegree = s * 0.0083333333333333;
-    tDegree = tHDegree + tMDegree + tSDegree;
+    new TDegree;
   
     $('.clock-arrow-4-6').css({
       'display': 'none'
@@ -707,15 +675,8 @@ if (tDegree <= 180) {
   
   function ArrowInCircle6() {
 
-  d = new Date();
-  h = d.getHours();
-  m = d.getMinutes();
-  s = d.getSeconds();
+    new TDegree;
 
-  tHDegree = h * 30;
-  tMDegree = m * 0.5;
-  tSDegree = s * 0.0083333333333333;
-  tDegree = tHDegree + tMDegree + tSDegree;
     
   $('.clock-arrow-3-5').css({
     'display': 'none'
