@@ -613,10 +613,15 @@ time();
 if (tDegree <= 180) { // Starts At Circle 3
 
   new TDegree;
-  var clockArrow3 = new ClockArrow();
+  arrowClock3 = new ClockArrow();
 
   function ArrowInCircle3() {
-    clockArrow3.arrow(3);
+    arrowClock3.arrow(3);
+
+    if (tDegree) {
+
+    }
+
     tDegree++;
     console.log(tDegree);
   }
@@ -625,13 +630,14 @@ if (tDegree <= 180) { // Starts At Circle 3
   setInterval(ArrowInCircle3, 100);
 
 
-} else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
+} else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle
+
+    new TDegree;
+    new ClockArrow(4);
 
   function ArrowInCircle4() {
 
-    new TDegree;
-    
-    new ClockArrow(4);
+
 
   }
 
@@ -640,11 +646,11 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
+    new TDegree;
+    new ClockArrow(5);
+
   function ArrowInCircle5() {
 
-    new TDegree;
-  
-    new ClockArrow(5);
   
   }
 
@@ -654,11 +660,11 @@ if (tDegree <= 180) { // Starts At Circle 3
 } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
   
+    new TDegree;
+    new ClockArrow(6);
+
   function ArrowInCircle6() {
 
-    new TDegree;
-
-    new ClockArrow(6);
   
 }
 
