@@ -633,12 +633,15 @@ if (tDegree <= 180) { // Starts At Circle 3
       arrowClock3.arrow(3);
     }
 
+    if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
     tDegree++;
     console.log(tDegree);
+    }
+
   }
 
   ArrowInCircle3();
-  setInterval(ArrowInCircle3, 5);
+  setInterval(ArrowInCircle3, 5); // the 5 ms is for testing
 
 
 } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
