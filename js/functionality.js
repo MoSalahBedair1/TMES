@@ -556,7 +556,6 @@ tHDegree,
 tMDegree,
 tSDegree,
 tDegree;
-// testVar = 181; // ============================================ Delete After the test
 
 class TDegree {
   constructor() {
@@ -568,33 +567,33 @@ class TDegree {
     tHDegree = h * 30;
     tMDegree = m * 0.5;
     tSDegree = s * 0.0083333333333333;
-    tDegree = tHDegree + tMDegree + tSDegree;
+    tDegree = 1;
   }
 }
 
 class ClockArrow {
-  constructor(arrowPlace) {
-    if (arrowPlace == 3 || arrowPlace == 5) {
-      $('.clock-arrow-4-6').css({
-      'display': 'none'
-    })
-
-    $('.clock-arrow-3-5').css({
-      'transform':`rotate(${tDegree}deg)`
-    });
-    } else if (arrowPlace == 4 || arrowPlace == 6) {
-      $('.clock-arrow-3-5').css({
-        'display': 'none'
-      });
-      
-      $('.clock-arrow-4-6').css({
-        'display': 'block',
-        'transform': `rotate(${tDegree}deg)`
-      });
-    }
-
-
+  constructor() {
   } 
+  arrow(arrowPlace) {
+    if (arrowPlace == 3 || arrowPlace == 5) {
+    $('.clock-arrow-4-6').css({
+    'display': 'none'
+  })
+
+  $('.clock-arrow-3-5').css({
+    'transform':`rotate(${tDegree}deg)`
+  });
+  } else if (arrowPlace == 4 || arrowPlace == 6) {
+    $('.clock-arrow-3-5').css({
+      'display': 'none'
+    });
+    
+    $('.clock-arrow-4-6').css({
+      'display': 'block',
+      'transform': `rotate(${tDegree}deg)`
+    });
+  }
+  }
 }
 
 function time() {
@@ -613,16 +612,18 @@ time();
 
 if (tDegree <= 180) { // Starts At Circle 3
 
+  new TDegree;
+  var clockArrow3 = new ClockArrow();
+
   function ArrowInCircle3() {
-
-    new TDegree;
-
-    new ClockArrow(3);
-
+    clockArrow3.arrow(3);
+    tDegree++;
+    console.log(tDegree);
   }
 
   ArrowInCircle3();
-  setInterval(ArrowInCircle3, 1000);
+  setInterval(ArrowInCircle3, 100);
+
 
 } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
 
