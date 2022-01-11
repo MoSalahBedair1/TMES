@@ -611,7 +611,7 @@ time();
 
 // checking where the arrow is
 
-if (tDegree <= 180) {
+if (tDegree <= 180) { // Starts At Circle 3
 
   function ArrowInCircle3() {
 
@@ -624,7 +624,7 @@ if (tDegree <= 180) {
   ArrowInCircle3();
   setInterval(ArrowInCircle3, 1000);
 
-} else  if (tDegree > 180 && tDegree <= 360) {
+} else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
 
   function ArrowInCircle4() {
 
@@ -632,27 +632,12 @@ if (tDegree <= 180) {
     
     new ClockArrow(4);
 
-    if (tDegree > 360 && tDegree <= 540 ) {
-
-      function ArrowInCircle5() {
-    
-        new TDegree;
-
-        new ClockArrow(5);
-      
-      }
-    
-      ArrowInCircle5();
-      setInterval(ArrowInCircle5, 1000);
-    
-    }
-
   }
 
   ArrowInCircle4();
-  setInterval(ArrowInCircle4, 10);
+  setInterval(ArrowInCircle4, 1000);
 
-} else if (tDegree > 360 && tDegree <= 540 ) {
+} else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
   function ArrowInCircle5() {
 
@@ -665,7 +650,7 @@ if (tDegree <= 180) {
   ArrowInCircle5();
   setInterval(ArrowInCircle5, 1000);
 
-} else if (tDegree > 540 && tDegree <= 720) {
+} else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
   
   function ArrowInCircle6() {
