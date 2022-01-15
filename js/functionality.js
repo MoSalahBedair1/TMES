@@ -575,7 +575,7 @@ class ClockArrow {
   constructor() {
   } 
   arrow(arrowPlace) {
-    if (arrowPlace == 3 || arrowPlace == 5) {
+    if (arrowPlace == 3) {
     $('.clock-arrow-4-6').css({
     'display': 'none'
   })
@@ -584,7 +584,7 @@ class ClockArrow {
     'display': 'block',
     'transform':`rotate(${tDegree}deg)`
   });
-  } else if (arrowPlace == 4 || arrowPlace == 6) {
+  } else if (arrowPlace == 4) {
     $('.clock-arrow-3-5').css({
       'display': 'none'
     });
@@ -593,7 +593,29 @@ class ClockArrow {
       'display': 'block',
       'transform': `rotate(${tDegree}deg)`
     });
-  }
+  } else if (arrowPlace == 5) {
+    $('.clock-arrow-3-5').css({
+      'display': 'block',
+      'height': '162.75px',
+      'top': '40%',
+      'transform':`rotate(${tDegree}deg)`
+    });
+    
+    $('.clock-arrow-4-6').css({
+      'display': 'none',
+    });
+  } else if (arrowPlace == 6) {
+    $('.clock-arrow-3-5').css({
+      'display': 'none'
+    });
+    
+    $('.clock-arrow-4-6').css({
+      'display': 'block',
+      'height':'194.8px',
+      'top': '30.4%',
+      'transform': `rotate(${tDegree}deg)`
+    })
+  } 
   }
 }
 
