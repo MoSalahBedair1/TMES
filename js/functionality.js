@@ -104,11 +104,6 @@ toM = parseInt($('.to-minutes').val()),
 toH = parseInt($('.to-hours').val()),
 StartPosition = fromS * 0.0083333333333333 + fromM * 0.5 + fromH * 30,
 EndPosition = toS * 0.0083333333333333 + toM * 0.5 + toH * 30,
-// totalSDeg = (toS < fromS ? (60 - fromS + toS) * 0.0083333333333333 : (toS - fromS) * 0.0083333333333333),
-// totalMDeg = (toM < fromM ? (60 - fromM + toM) * 0.5 : (toM - fromM) * 0.5),
-// edit total hour, test: from 13:04:34 to 14:04:34 && 13:04: 34 to 15:00:00 *************************************
-// totalHDeg = (toM < fromM && toM == 0 && toH == fromH + 1) ? 0 : ((fromH == 0 && fromM == 0 && fromS == 0) ? (toH - fromH) * 30 : (fromH == 0 && fromM != 0) ? 0 : (fromH == 0 && fromS != 0) ? 0 : (toH - fromH) * 30),
-// totalDeg = totalSDeg + totalMDeg + totalHDeg,
 totalDeg = EndPosition - StartPosition,
 color = $('.from-to-color').val();
 
