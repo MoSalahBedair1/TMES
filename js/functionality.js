@@ -255,7 +255,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
   new Circle4Add;
   window.setTimeout(() => {$(`.fill${num}-circle4`).css('transform',`rotate(${(EndPosition - 180)}deg)`);num++}, 550);
 
-} else if (StartPosition < 180 && EndPosition > 360 && EndPosition <= 540) { // Start In Circle3 And End In Circle5
+  } else if (StartPosition < 180 && EndPosition > 360 && EndPosition <= 540) { // Start In Circle3 And End In Circle5
 
   var complete = 180 - StartPosition; // to complete from start position to end of the circle 1
   new Circle3Add;
@@ -266,7 +266,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
   new Circle5Add;
   window.setTimeout(() => {$(`.fill${num}continued-circle5`).css('transform',`rotate(${EndPosition - 360}deg)`);num++}, 850);
 
-} else if (StartPosition < 180 && EndPosition > 540 && EndPosition <= 720) { // Start In Circle3 And End In Circle6
+  } else if (StartPosition < 180 && EndPosition > 540 && EndPosition <= 720) { // Start In Circle3 And End In Circle6
 
   var complete1 = 180 - StartPosition; // to complete from start position to end of the circle 1
   new Circle3Add;
@@ -279,7 +279,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
   new Circle6Add
   window.setTimeout(() => {$(`.fill${num}continued-circle6`).css('transform',`rotate(${EndPosition - 540}deg)`);num++}, 1150);
 
-} else if (StartPosition >= 180 && EndPosition <= 360) { // Start In Circle4 And End In Circle4
+  } else if (StartPosition >= 180 && EndPosition <= 360) { // Start In Circle4 And End In Circle4
   
   console.log('Start In Circle4 And End In Circle4')
     new Circle4AddType2;
