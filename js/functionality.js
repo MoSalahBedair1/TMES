@@ -660,7 +660,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle3();
-  setInterval(ArrowInCircle3, 10); // the 5 ms is for testing
+  setInterval(ArrowInCircle3, 1000);
 
 
 } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
@@ -680,7 +680,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle4();
-  setInterval(ArrowInCircle4, 5);
+  setInterval(ArrowInCircle4, 1000);
 
 } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
@@ -697,7 +697,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle5();
-  setInterval(ArrowInCircle5, 5);
+  setInterval(ArrowInCircle5, 1000);
 
 } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
@@ -711,7 +711,7 @@ if (tDegree <= 180) { // Starts At Circle 3
 }
 
   ArrowInCircle6();
-  setInterval(ArrowInCircle6, 5);
+  setInterval(ArrowInCircle6, 1000);
 }
 
 });
