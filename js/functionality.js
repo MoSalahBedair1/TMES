@@ -645,15 +645,15 @@ if (tDegree <= 180) { // Starts At Circle 3
 
   function ArrowInCircle3() {
 
-    if (tDegree > 540 && tDegree <= 720) {
-      arrowClock6.arrow(6);
-    } else if (tDegree > 360 && tDegree <= 540 ) { 
-      arrowClock5.arrow(5);
-    } else if (tDegree > 180 && tDegree <= 360) {
-      arrowClock4.arrow(4);
-    } else if (tDegree <= 180) {
-      arrowClock3.arrow(3);
-    }
+  if (tDegree > 540 && tDegree <= 720) {
+    arrowClock6.arrow(6);
+  } else if (tDegree > 360 && tDegree <= 540 ) { 
+    arrowClock5.arrow(5);
+  } else if (tDegree > 180 && tDegree <= 360) {
+    arrowClock4.arrow(4);
+  } else if (tDegree <= 180) {
+    arrowClock3.arrow(3);
+  }
 
     if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
     tDegree++;
