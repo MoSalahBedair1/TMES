@@ -67,21 +67,21 @@ var FromToSelectors = [".from-hours", ".from-minutes", ".from-seconds", ".to-hou
 
 FromToSelectors.forEach(selector => {
   $(`${selector}`).on('input', function () {
-    if (Number.isNaN(Number(($(`${selector}`).val()))) && $(`${selector}`).val() != '00' && $(`${selector}`).val() != '0' && $(`${selector}`).val() != '') {
-      $(`${selector}`).css({
+    if (Number.isNaN(Number(($(this).val()))) && $(this).val() != '00' && $(this).val() != '0' && $(this).val() != '') {
+      $(this).css({
         'outline-color': 'red'
       })
     } else {
-      $(`${selector}`).css({
+      $(this).css({
         'outline-color': 'black'
       })
-    } $(`${selector}`).on('blur', function () {
-      $(`${selector}`).off('blur'); // Cutting The Ear Of The Event Listener hahaha :"D
-      if ($(`${selector}`).val() == '' || Number.isNaN(Number(($(`${selector}`).val())))) {
-        $(`${selector}`).val('00');
+    } $(this).on('blur', function () {
+      $(this).off('blur'); // Cutting The Ear Of The Event Listener hahaha :"D
+      if ($(this).val() == '' || Number.isNaN(Number(($(this).val())))) {
+        $(this).val('00');
       }
-      if (Number($(`${selector}`).val()) < 10) {
-      $(`${selector}`).val('0' + Number($(`${selector}`).val()));
+      if (Number($(this).val()) < 10) {
+      $(this).val('0' + Number($(this).val()));
     }
   })
   });
@@ -559,6 +559,8 @@ tDegree;
 
 class TDegree {
   constructor() {
+  }
+  newTdegree() {
     d = new Date();
     h = d.getHours();
     m = d.getMinutes();
@@ -567,7 +569,7 @@ class TDegree {
     tHDegree = h * 30;
     tMDegree = m * 0.5;
     tSDegree = s * 0.0083333333333333;
-    tDegree = 1;
+    tDegree = tHDegree + tMDegree + tSDegree;
   }
 }
 
@@ -624,10 +626,10 @@ arrowClock4 = new ClockArrow();
 arrowClock5 = new ClockArrow();
 arrowClock6 = new ClockArrow();
 
-
 function time() {
 
-  new TDegree;
+  newTime = new TDegree;
+  newTime.newTdegree();
 
   t = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
 
@@ -641,8 +643,6 @@ time();
 
 if (tDegree <= 180) { // Starts At Circle 3
 
-  new TDegree;
-
   function ArrowInCircle3() {
 
   if (tDegree > 540 && tDegree <= 720) {
@@ -655,10 +655,7 @@ if (tDegree <= 180) { // Starts At Circle 3
     arrowClock3.arrow(3);
   }
 
-  if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
-  tDegree++;
-  console.log(tDegree);
-  }
+  newTime.newTdegree();
 
   }
 
@@ -667,8 +664,6 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 
 } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
-
-  new TDegree;
 
   function ArrowInCircle4() {
 
@@ -680,11 +675,7 @@ if (tDegree <= 180) { // Starts At Circle 3
     arrowClock4.arrow(4);
   }
 
-
-  if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
-    tDegree++;
-    console.log(tDegree);
-    }
+  newTime.newTdegree();
 
   }
 
@@ -693,8 +684,6 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
-  new TDegree;
-  
   function ArrowInCircle5() {
 
   if (tDegree > 540 && tDegree <= 720) {
@@ -703,10 +692,7 @@ if (tDegree <= 180) { // Starts At Circle 3
     arrowClock5.arrow(5);
   }
 
-  if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
-    tDegree++;
-    console.log(tDegree);
-    }
+  newTime.newTdegree();
 
   }
 
@@ -715,19 +701,12 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
-  new TDegree;
-  
   function ArrowInCircle6() {
     if (tDegree > 540 && tDegree <= 720) {
       arrowClock6.arrow(6);
     }
 
-    
-     if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
-      tDegree++;
-      console.log(tDegree);
-      }
-
+    newTime.newTdegree();
 
 }
 
