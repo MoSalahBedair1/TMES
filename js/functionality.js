@@ -573,7 +573,7 @@ class TDegree {
 
 class ClockArrow {
   constructor() {
-  } 
+  }
   arrow(arrowPlace) {
     if (arrowPlace == 3) {
     $('.clock-arrow-4-6').css({
@@ -655,52 +655,84 @@ if (tDegree <= 180) { // Starts At Circle 3
     arrowClock3.arrow(3);
   }
 
-    if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
+  if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
+  tDegree++;
+  console.log(tDegree);
+  }
+
+  }
+
+  ArrowInCircle3();
+  setInterval(ArrowInCircle3, 10); // the 5 ms is for testing
+
+
+} else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
+
+  new TDegree;
+
+  function ArrowInCircle4() {
+
+  if (tDegree > 540 && tDegree <= 720) {
+    arrowClock6.arrow(6);
+  } else if (tDegree > 360 && tDegree <= 540 ) { 
+    arrowClock5.arrow(5);
+  } else if (tDegree > 180 && tDegree <= 360) {
+    arrowClock4.arrow(4);
+  }
+
+
+  if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
     tDegree++;
     console.log(tDegree);
     }
 
   }
 
-  ArrowInCircle3();
-  setInterval(ArrowInCircle3, 5); // the 5 ms is for testing
-
-
-} else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
-
-    new TDegree;
-    arrowClock4 = new ClockArrow();
-
-  function ArrowInCircle4() {
-
-  }
-
   ArrowInCircle4();
-  setInterval(ArrowInCircle4, 1000);
+  setInterval(ArrowInCircle4, 5);
 
 } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
-    new TDegree;
-    arrowClock5 = new ClockArrow();
-
+  new TDegree;
+  
   function ArrowInCircle5() {
+
+  if (tDegree > 540 && tDegree <= 720) {
+    arrowClock6.arrow(6);
+  } else if (tDegree > 360 && tDegree <= 540 ) { 
+    arrowClock5.arrow(5);
+  }
+
+  if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
+    tDegree++;
+    console.log(tDegree);
+    }
 
   }
 
   ArrowInCircle5();
-  setInterval(ArrowInCircle5, 1000);
+  setInterval(ArrowInCircle5, 5);
 
 } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
-    new TDegree;
-    arrowClock6 = new ClockArrow();
-
+  new TDegree;
+  
   function ArrowInCircle6() {
+    if (tDegree > 540 && tDegree <= 720) {
+      arrowClock6.arrow(6);
+    }
+
+    
+     if (tDegree < 720) { // this condition is for testing and it will be deleted, not it's body
+      tDegree++;
+      console.log(tDegree);
+      }
+
 
 }
 
   ArrowInCircle6();
-  setInterval(ArrowInCircle6, 1000);
+  setInterval(ArrowInCircle6, 5);
 }
 
 });
