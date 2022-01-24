@@ -40,7 +40,8 @@ $(function () {
     }
   }
 
-let circle1New = new Circle(),
+let
+circle1New = new Circle(),
 circle2New = new Circle(),
 circle3New = new Circle(),
 circle4New = new Circle(),
@@ -87,7 +88,7 @@ FromToSelectors.forEach(selector => {
   });
 });
 
-var 
+var
 num = 1,
 storedFromH = 0;
 
@@ -377,7 +378,8 @@ d.getFullYear();
 
 // Getting The Current Time & Real Time Clock
 
-var span = document.getElementById('span'),
+var
+span = document.getElementById('span'),
 d,
 h,
 m,
