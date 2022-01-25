@@ -90,13 +90,7 @@ FromToSelectors.forEach(selector => {
 
 var
 num = 1,
-storedFromH = 0;
-
-$('.add').click(function () {
-
-  // Add An Input Checker Code Later
-
-var
+storedFromH = 0,
 fromS = parseInt($('.from-seconds').val()),
 fromM = parseInt($('.from-minutes').val()),
 fromH = parseInt($('.from-hours').val()),
@@ -134,6 +128,21 @@ class Circle3Add {
         transform: rotate(${StartPosition}deg);'></div>`);
       }
   }
+
+  circle3Add() {
+    let add = $('.circle3').prepend(`<div class='fill${num}-circle3' style='
+    width: 99.75px;
+    height: 199.5px;
+    background-color: ${color};
+    position: absolute;
+    right: 100%;
+    top: -3px;
+    transform-origin: right center;
+    transition: transform 0.5s linear;
+    transform: rotate(${tDegree}deg);'></div>`);
+    return typeof(add);
+  }
+
 }
 class Circle4Add {
   constructor() {
@@ -240,6 +249,8 @@ class Circle5AddType2 {
 
   }
 }
+
+$('.add').click(function () {
 
 if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In Circle3
 
@@ -546,5 +557,21 @@ if (tDegree <= 180) { // Starts At Circle 3
   ArrowInCircle6();
   setInterval(ArrowInCircle6, 1000);
 }
+
+
+$('.go-btn').click(function () {
+
+  if (tDegree <= 180) { // Starts At Circle 3
+    circle3Add.circle3Add();
+  } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
+  } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
+  } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
+  }
+
+});
+circle3Add = new Circle3Add;
+
+
+console.log(circle3Add.circle3Add())
 
 });
