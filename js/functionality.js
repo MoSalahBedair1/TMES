@@ -129,8 +129,19 @@ class Circle3Add {
       }
   }
 
-  circle3Add() {
-    let add = $('.circle3').prepend(`<div class='fill${num}-circle3' style='
+  circle3AddTrack() {
+    $('.circle3').prepend(`<div class='empty' style='
+    width: 99.75px;
+    height: 199.5px;
+    background-color: white;
+    position: absolute;
+    right: 100%;
+    top: -3px;
+    transform-origin: right center;
+    transition: transform 0.5s linear;
+    transform: rotate(${tDegree}deg);'></div>`);
+
+    $('.circle3').prepend(`<div class='fill${num}-circle3' style='
     width: 99.75px;
     height: 199.5px;
     background-color: ${color};
@@ -140,7 +151,10 @@ class Circle3Add {
     transform-origin: right center;
     transition: transform 0.5s linear;
     transform: rotate(${tDegree}deg);'></div>`);
-    return typeof(add);
+  }
+
+  circle3ChangeTdegree() {
+    document.getElementsByClassName(`.fill${num}-circle3`).style.transform = `rotate(${tDegree}deg)`;
   }
 
 }
@@ -481,9 +495,10 @@ function time() {
 
 };
 
-time();
+time()
+setInterval(time, 1000);;
 
-// checking where the arrow is
+// checking where the arrow is, to make aa live analog clock
 
 if (tDegree <= 180) { // Starts At Circle 3
 
@@ -559,19 +574,59 @@ if (tDegree <= 180) { // Starts At Circle 3
 }
 
 
-$('.go-btn').click(function () {
+// Tracking functionality
 
-  if (tDegree <= 180) { // Starts At Circle 3
-    circle3Add.circle3Add();
-  } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
-  } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
-  } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
-  }
-
-});
 circle3Add = new Circle3Add;
 
 
-console.log(circle3Add.circle3Add())
+$('.go-btn').click(function () {
+
+  $('.stp-btn').css('display','inline');
+  $('.go-btn').css('display','none');
+
+  if (tDegree <= 180) { // Starts At Circle 3
+    circle3Add.circle3AddTrack();
+  } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
+    circle3Add.circle3AddTrack();
+  } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
+    circle3Add.circle3AddTrack();
+  } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
+    circle3Add.circle3AddTrack();
+  }
+
+  function track() {
+    if ($('.stp-btn').is(':visible')) {
+      if (tDegree <= 180) { // Starts At Circle 3
+        circle3Add.circle3ChangeTdegree();
+      } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
+        circle3Add.circle3ChangeTdegree();
+      } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
+        circle3Add.circle3ChangeTdegree();
+      } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
+        circle3Add.circle3ChangeTdegree();
+      }
+    }
+  }
+
+  track()
+  setInterval(track, 1000);
+
+
+});
+
+
+// console.log(circle3Add.circle3Add())
+
+$('.stp-btn').click(function () {
+
+  $('.go-btn').css('display', 'inline');
+  $(this).css('display', 'none');
+
+  if ($('.stp-btn').is(':hidden')) {
+    console.log('hidden');
+  }
+
+});
+
 
 });
