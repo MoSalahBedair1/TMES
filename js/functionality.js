@@ -3,8 +3,7 @@ $(function () {
   /* === Spiraldex Section === */
 
   class Circle {
-    constructor() {
-      this.make = function (circleName, circleWidth, noLeftSide) {
+    constructor(circleName, circleWidth, noLeftSide) {
         var
         circleName = document.querySelector(`.${circleName}`),
         circleWidth = circleWidth,
@@ -26,7 +25,6 @@ $(function () {
           circleName.style.borderBottomRightRadius = circleHeightPxString;
           circleName.style.borderBottomLeftRadius = 0;
 
-
         } else {
 
           circleName.style.borderTopLeftRadius = circleHeightPxString;
@@ -36,25 +34,15 @@ $(function () {
 
         }
 
-      };
     }
   }
 
-let
-circle1New = new Circle(),
-circle2New = new Circle(),
-circle3New = new Circle(),
-circle4New = new Circle(),
-circle5New = new Circle(),
-circle6New = new Circle();
-
-circle1New.make('circle1', '5', true);
-circle2New.make('circle2', '10', false);
-circle3New.make('circle3', '15', true);
-circle4New.make('circle4', '20', false);
-circle5New.make('circle5', '25', true);
-circle6New.make('circle6', '30', false);
-
+new Circle('circle1', '5', true),
+new Circle('circle2', '10', false),
+new Circle('circle3', '15', true),
+new Circle('circle4', '20', false),
+new Circle('circle5', '25', true),
+new Circle('circle6', '30', false);
 
 /* === Start Control Panel Section === */
 
@@ -88,49 +76,45 @@ FromToSelectors.forEach(selector => {
   });
 });
 
-var
-num = 1,
-storedFromH = 0,
-fromS = parseInt($('.from-seconds').val()),
-fromM = parseInt($('.from-minutes').val()),
-fromH = parseInt($('.from-hours').val()),
-toS = parseInt($('.to-seconds').val()),
-toM = parseInt($('.to-minutes').val()),
-toH = parseInt($('.to-hours').val()),
-StartPosition = fromS * 0.0083333333333333 + fromM * 0.5 + fromH * 30,
-EndPosition = toS * 0.0083333333333333 + toM * 0.5 + toH * 30,
-totalDeg = EndPosition - StartPosition,
-color = $('.from-to-color').val();
-
 class Circle3Add {
   constructor() {
-        if (toH != storedFromH + 1) {
-        $('.circle3').prepend(`<div class='empty' style='
-        width: 99.75px;
-        height: 199.5px;
-        background-color: white;
-        position: absolute;
-        right: 100%;
-        top: -3px;
-        transform-origin: right center;
-        transition: transform 0.5s linear;
-        transform: rotate(${StartPosition}deg);'></div>`);
-  
-        $('.circle3').prepend(`<div class='fill${num}-circle3' style='
-        width: 99.75px;
-        height: 199.5px;
-        background-color: ${color};
-        position: absolute;
-        right: 100%;
-        top: -3px;
-        transform-origin: right center;
-        transition: transform 0.5s linear;
-        transform: rotate(${StartPosition}deg);'></div>`);
-      }
+  }
+
+  circle3AddFill(){
+    console.log(toH, storedFromH, StartPosition);
+    if (toH != storedFromH + 1) {
+      $('.circle3').prepend(`<div
+      class='empty'
+      style='
+      width: 99.75px;
+      height: 199.5px;
+      background-color: white;
+      position: absolute;
+      right: 100%;
+      top: -3px;
+      transform-origin: right center;
+      transition: transform 0.5s linear;
+      transform: rotate(${StartPosition}deg);'></div>`);
+
+      $('.circle3').prepend(`<div
+      class='fill${num}-circle3'
+      style='
+      width: 99.75px;
+      height: 199.5px;
+      background-color: ${color};
+      position: absolute;
+      right: 100%;
+      top: -3px;
+      transform-origin: right center;
+      transition: transform 0.5s linear;
+      transform: rotate(${StartPosition}deg);'></div>`);
+    }
   }
 
   circle3AddTrack() {
-    $('.circle3').prepend(`<div class='empty' style='
+    $('.circle3').prepend(`<div
+    class='empty'
+    style='
     width: 99.75px;
     height: 199.5px;
     background-color: white;
@@ -141,7 +125,9 @@ class Circle3Add {
     transition: transform 0.5s linear;
     transform: rotate(${tDegree}deg);'></div>`);
 
-    $('.circle3').prepend(`<div class='fill${num}-circle3' style='
+    $('.circle3').prepend(`<div
+    class='fill${num}-circle3'
+    style='
     width: 99.75px;
     height: 199.5px;
     background-color: ${color};
@@ -153,14 +139,18 @@ class Circle3Add {
     transform: rotate(${tDegree}deg);'></div>`);
   }
 
-  circle3ChangeTdegree() {
-    document.getElementsByClassName(`.fill${num}-circle3`).style.transform = `rotate(${tDegree}deg)`;
+    circle3ChangeTdegree() {
+    $(`.fill${num}-circle3`).css({
+      'transform': `rotate(170deg)`
+    });
   }
 
 }
 class Circle4Add {
   constructor() {
-    $('.circle4').prepend(`<div class='fill${num}-circle4' style='
+    $('.circle4').prepend(`<div
+    class='fill${num}-circle4'
+    style='
     width: 133px;
     height: 266;
     background-color: ${color};
@@ -174,7 +164,9 @@ class Circle4Add {
 }
 class Circle5Add {
   constructor() {
-    $('.circle5').prepend(`<div class='fill${num}continued-circle5' style='
+    $('.circle5').prepend(`<div
+    class='fill${num}-circle5'
+    style='
     width: 166.25px;
     height: 332.5;
     background-color: ${color};
@@ -188,7 +180,11 @@ class Circle5Add {
 }
 class Circle6Add {
   constructor() {
-    $('.circle6').prepend(`<div class='fill${num}continued-circle6' style='
+  }
+  circle6AddFill() {
+    $('.circle6').prepend(`<div
+    class='fill${num}-circle6'
+    style='
     width: 199.5px;
     height: 399px;
     background-color: ${color};
@@ -203,7 +199,9 @@ class Circle6Add {
 class Circle4AddType2 {
   constructor() {
     if (toH != storedFromH + 1) {
-      $('.circle4').prepend(`<div class='empty' style='
+      $('.circle4').prepend(`<div
+      class='empty'
+      style='
       width: 133px;
       height: 266px;
       background-color: white;
@@ -219,7 +217,9 @@ class Circle4AddType2 {
       $('.circle4 .empty[style*=0deg]').remove();
     }
 
-    $('.circle4').prepend(`<div class='fill${num}' style='
+    $('.circle4').prepend(`<div
+    class='fill${num}'
+    style='
     width: 133px;
     height: 266;
     background-color: ${color};
@@ -234,7 +234,9 @@ class Circle4AddType2 {
 class Circle5AddType2 {
   constructor() {
     if (toH != storedFromH + 1) {
-      $('.circle5').prepend(`<div class='empty' style='
+      $('.circle5').prepend(`<div
+      class='empty'
+      style='
       width: 166.25px;
       height: 332.5px;
       background-color: white;
@@ -250,7 +252,9 @@ class Circle5AddType2 {
       $('.circle5 .empty[style*=0deg]').remove();
     }
 
-    $('.circle5').prepend(`<div class='fill${num}' style='
+    $('.circle5').prepend(`<div
+    class='fill${num}'
+    style='
     width: 166.25px;
     height: 332.5px;
     background-color: ${color};
@@ -266,16 +270,229 @@ class Circle5AddType2 {
 
 $('.add').click(function () {
 
+var
+num = 1,
+storedFromH = 0,
+fromS = parseInt($('.from-seconds').val()),
+fromM = parseInt($('.from-minutes').val()),
+fromH = parseInt($('.from-hours').val()),
+toS = parseInt($('.to-seconds').val()),
+toM = parseInt($('.to-minutes').val()),
+toH = parseInt($('.to-hours').val()),
+StartPosition = fromS * 0.0083333333333333 + fromM * 0.5 + fromH * 30,
+EndPosition = toS * 0.0083333333333333 + toM * 0.5 + toH * 30,
+totalDeg = EndPosition - StartPosition,
+color = $('.from-to-color').val();
+
+class Circle3Add {
+
+  circle3AddFill(){
+    if (toH != storedFromH + 1) {
+      $('.circle3').prepend(`<div
+      class='empty'
+      style='
+      width: 99.75px;
+      height: 199.5px;
+      background-color: white;
+      position: absolute;
+      right: 100%;
+      top: -3px;
+      transform-origin: right center;
+      transition: transform 0.5s linear;
+      transform: rotate(${StartPosition}deg);'></div>`);
+
+      $('.circle3').prepend(`<div 
+      class='fill${num}-circle3'
+      style='
+      width: 99.75px;
+      height: 199.5px;
+      background-color: ${color};
+      position: absolute;
+      right: 100%;
+      top: -3px;
+      transform-origin: right center;
+      transition: transform 0.5s linear;
+      transform: rotate(${StartPosition}deg);'></div>`);
+    }
+  }
+
+  circle3AddTrack() {
+    $('.circle3').prepend(`<div
+    class='empty' 
+    style='
+    width: 99.75px;
+    height: 199.5px;
+    background-color: white;
+    position: absolute;
+    right: 100%;
+    top: -3px;
+    transform-origin: right center;
+    transition: transform 0.5s linear;
+    transform: rotate(${tDegree}deg);'></div>`);
+
+    $('.circle3').prepend(`<div 
+    class='fill${num}-circle3' 
+    style='
+    width: 99.75px;
+    height: 199.5px;
+    background-color: ${color};
+    position: absolute;
+    right: 100%;
+    top: -3px;
+    transform-origin: right center;
+    transition: transform 0.5s linear;
+    transform: rotate(${tDegree}deg);'></div>`);
+  }
+
+    circle3ChangeTdegree() {
+    $(`.fill${num}-circle3`).css({
+      'transform': `rotate(170deg)`
+    });
+  }
+}
+class Circle4Add {
+
+  Circle4AddFill() {
+    $('.circle4').prepend(`<div
+    class='fill${num}-circle4'
+    style='
+    width: 133px;
+    height: 266;
+    background-color: ${color};
+    position: absolute;
+    left: 100%;
+    bottom: -3px;
+    transform-origin: left center;
+    transition: transform 0.3s linear;
+    transform: rotate(0deg);'></div>`);
+  }
+
+  Circle4AddType2() {
+    if (toH != storedFromH + 1) {
+      $('.circle4').prepend(`<div 
+      class='empty' 
+      style='
+      width: 133px;
+      height: 266px;
+      background-color: white;
+      position: absolute;
+      left: 100%;
+      top: -3px;
+      transform-origin: left center;
+      transition: transform 0.5s linear;
+      transform: rotate(${StartPosition - 180}deg);'></div>`);
+    }
+
+    if (StartPosition == 180) {
+      $('.circle4 .empty[style*=0deg]').remove();
+    }
+
+    $('.circle4').prepend(`<div 
+    class='fill${num}' 
+    style='
+    width: 133px;
+    height: 266;
+    background-color: ${color};
+    position: absolute;
+    left: 100%;
+    bottom: -3px;
+    transform-origin: left center;
+    transition: transform 0.5s linear;
+    transform: rotate(${StartPosition - 180}deg);'></div>`);
+  }
+
+}
+class Circle5Add {
+
+
+  Circle5AddFill() {
+    $('.circle5').prepend(`<div
+    class='fill${num}-circle5'
+    style='
+    width: 166.25px;
+    height: 332.5;
+    background-color: ${color};
+    position: absolute;
+    right: 100%;
+    bottom: -3px;
+    transform-origin: right center;
+    transition: transform 0.3s linear;
+    transform: rotate(0deg);'></div>`);
+}
+
+  Circle5AddType2() {
+    if (toH != storedFromH + 1) {
+      $('.circle5').prepend(`<div 
+      class='empty' 
+      style='
+      width: 166.25px;
+      height: 332.5px;
+      background-color: white;
+      position: absolute;
+      right: 100%;
+      top: -3px;
+      transform-origin: right center;
+      transition: transform 0.5s linear;
+      transform: rotate(${StartPosition - 360}deg);'></div>`);
+    }
+
+    if (StartPosition == 360) {
+      $('.circle5 .empty[style*=0deg]').remove();
+    }
+
+    $('.circle5').prepend(`<div 
+    class='fill${num}' 
+    style='
+    width: 166.25px;
+    height: 332.5px;
+    background-color: ${color};
+    position: absolute;
+    right: 100%;
+    bottom: -3px;
+    transform-origin: right center;
+    transition: transform 0.5s linear;
+    transform: rotate(${StartPosition - 360}deg);'></div>`);
+  }
+}
+class Circle6Add {
+  constructor() {
+  }
+  circle6AddFill() {
+    $('.circle6').prepend(`<div 
+    class='fill${num}-circle6' 
+    style='
+    width: 199.5px;
+    height: 399px;
+    background-color: ${color};
+    position: absolute;
+    left: 100%;
+    bottom: -3px;
+    transform-origin: left center;
+    transition: transform 0.3s linear;
+    transform: rotate(0deg);'></div>`);
+  }
+}
+class Circle4AddType2 {
+  constructor() {
+  }
+}
+class Circle5AddType2 {
+  constructor() {
+  }
+}
+
+circle3Add = new Circle3Add;
+
 if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In Circle3
 
-  new Circle3Add;
+  circle3Add.circle3AddFill();
   storedFromH = fromH;
   window.setTimeout(() => {$(`.fill${num}-circle3`).css('transform',`rotate(${StartPosition + totalDeg}deg)`);num++}, 50);
 
 } else if (StartPosition < 180 && EndPosition > 180 && EndPosition <= 360) { // Start In Circle3 And End In Circle4
 
   var complete = 180 - StartPosition; // to complete from start position to end of the circle 1
-  new Circle3Add;
+  circle3Add.circle3AddFill();
   storedFromH = fromH;
   window.setTimeout(() => {$(`.fill${num}-circle3`).css('transform',`rotate(${StartPosition + complete}deg)`)}, 50)
   new Circle4Add;
@@ -284,26 +501,26 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
   } else if (StartPosition < 180 && EndPosition > 360 && EndPosition <= 540) { // Start In Circle3 And End In Circle5
 
   var complete = 180 - StartPosition; // to complete from start position to end of the circle 1
-  new Circle3Add;
+  circle3Add.circle3AddFill();
   storedFromH = fromH;
   window.setTimeout(() => {$(`.fill${num}-circle3`).css('transform',`rotate(${StartPosition + complete}deg)`)}, 50)
   new Circle4Add;
   window.setTimeout(() => {$(`.fill${num}-circle4`).css('transform',`rotate(${(180)}deg)`)}, 550);
   new Circle5Add;
-  window.setTimeout(() => {$(`.fill${num}continued-circle5`).css('transform',`rotate(${EndPosition - 360}deg)`);num++}, 850);
+  window.setTimeout(() => {$(`.fill${num}-circle5`).css('transform',`rotate(${EndPosition - 360}deg)`);num++}, 850);
 
   } else if (StartPosition < 180 && EndPosition > 540 && EndPosition <= 720) { // Start In Circle3 And End In Circle6
 
   var complete1 = 180 - StartPosition; // to complete from start position to end of the circle 1
-  new Circle3Add;
+  circle3Add.circle3AddFill();
   storedFromH = fromH;
   window.setTimeout(() => {$(`.fill${num}-circle3`).css('transform',`rotate(${StartPosition + complete1}deg)`)}, 50)
   new Circle4Add;
-  window.setTimeout(() => {$(`.fill${num}continued-circle4`).css('transform',`rotate(${(180)}deg)`)}, 550);
+  window.setTimeout(() => {$(`.fill${num}-circle4`).css('transform',`rotate(${(180)}deg)`)}, 550);
   new Circle5Add;
-  window.setTimeout(() => {$(`.fill${num}continued-circle5`).css('transform',`rotate(${180}deg)`)}, 850);
+  window.setTimeout(() => {$(`.fill${num}-circle5`).css('transform',`rotate(${180}deg)`)}, 850);
   new Circle6Add
-  window.setTimeout(() => {$(`.fill${num}continued-circle6`).css('transform',`rotate(${EndPosition - 540}deg)`);num++}, 1150);
+  window.setTimeout(() => {$(`.fill${num}-circle6`).css('transform',`rotate(${EndPosition - 540}deg)`);num++}, 1150);
 
   } else if (StartPosition >= 180 && EndPosition <= 360) { // Start In Circle4 And End In Circle4
   
@@ -320,7 +537,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
     storedFromH = fromH;
     window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${(StartPosition - 180) + complete2}deg)`)}, 50);
     new Circle5Add;
-    window.setTimeout(() => {$(`.fill${num}continued-circle5`).css('transform',`rotate(${EndPosition - 360}deg)`);num++}, 550);
+    window.setTimeout(() => {$(`.fill${num}-circle5`).css('transform',`rotate(${EndPosition - 360}deg)`);num++}, 550);
 
   } else if (StartPosition >= 180 && StartPosition < 360 && EndPosition > 540 && EndPosition <= 720) { // Start In Circle4 And End In Circle6
 
@@ -330,9 +547,9 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
     storedFromH = fromH;
     window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${(StartPosition - 180) + complete2}deg)`)}, 50);
     new Circle5Add;
-    window.setTimeout(() => {$(`.fill${num}continued-circle5`).css('transform',`rotate(${180}deg)`)}, 550);
+    window.setTimeout(() => {$(`.fill${num}-circle5`).css('transform',`rotate(${180}deg)`)}, 550);
     new Circle6Add;
-    window.setTimeout(() => {$(`.fill${num}continued-circle6`).css('transform',`rotate(${EndPosition - 540}deg)`);num++}, 850);
+    window.setTimeout(() => {$(`.fill${num}-circle6`).css('transform',`rotate(${EndPosition - 540}deg)`);num++}, 850);
 
   } else if (StartPosition >= 360 && EndPosition <= 540) { // Start In Circle5 And End In Circle5
 
@@ -348,12 +565,14 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
     storedFromH = fromH;
     window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${180}deg)`)}, 50);
     new Circle6Add;
-    window.setTimeout(() => {$(`.fill${num}continued-circle6`).css('transform',`rotate(${EndPosition - 540}deg)`);num++}, 550);
+    window.setTimeout(() => {$(`.fill${num}-circle6`).css('transform',`rotate(${EndPosition - 540}deg)`);num++}, 550);
 
   } else if (StartPosition >= 540 && EndPosition <= 720) {  // Start In Circle6 And End In Circle6
 
     if (toH != storedFromH + 1) {
-      $('.circle6').prepend(`<div class='empty' style='
+      $('.circle6').prepend(`<div 
+      class='empty' 
+      style='
       width: 199.5px;
       height: 399px;  
       background-color: white;
@@ -368,7 +587,9 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
       $('.circle6 .empty[style*=0deg]').remove();
     }
     storedFromH = fromH;
-    $('.circle6').prepend(`<div class='fill${num}' style='
+    $('.circle6').prepend(`<div 
+    class='fill${num}' 
+    style='
     width: 199.5px;
     height: 399px;
     background-color: ${color};
@@ -427,13 +648,13 @@ class TDegree {
     tHDegree = h * 30;
     tMDegree = m * 0.5;
     tSDegree = s * 0.0083333333333333;
-    tDegree = tHDegree + tMDegree + tSDegree;
+    // tDegree = tHDegree + tMDegree + tSDegree;
+    tDegree = 150;
   }
 }
 
 class ClockArrow {
-  constructor() {
-  }
+
   arrow(arrowPlace) {
     if (arrowPlace == 3) {
     $('.clock-arrow-4-6').css({
@@ -578,7 +799,6 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 circle3Add = new Circle3Add;
 
-
 $('.go-btn').click(function () {
 
   $('.stp-btn').css('display','inline');
@@ -597,7 +817,7 @@ $('.go-btn').click(function () {
   function track() {
     if ($('.stp-btn').is(':visible')) {
       if (tDegree <= 180) { // Starts At Circle 3
-        circle3Add.circle3ChangeTdegree();
+        circle3Add.circle3AddTrack();
       } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
         circle3Add.circle3ChangeTdegree();
       } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
@@ -609,7 +829,8 @@ $('.go-btn').click(function () {
   }
 
   track()
-  setInterval(track, 1000);
+  circle3Add.circle3ChangeTdegree();
+  // setInterval(circle3Add.circle3ChangeTdegree(), 1000);
 
 
 });
