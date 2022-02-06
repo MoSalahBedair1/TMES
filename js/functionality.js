@@ -444,8 +444,7 @@ class TDegree {
     tHDegree = h * 30;
     tMDegree = m * 0.5;
     tSDegree = s * 0.0083333333333333;
-    tDegree = tHDegree + tMDegree + tSDegree;
-    tDegree = 540;
+    tDegree = tHDegree + tMDegree + tSDegree;  
   }
 }
 
@@ -517,7 +516,7 @@ setInterval(time, 1000);;
 
 // checking where the arrow is, to make a live analog clock
 
-if (tDegree < 180) { // Starts At Circle 3
+if (tDegree <= 180) { // Starts At Circle 3
 
   function ArrowInCircle3() {
 
@@ -539,7 +538,7 @@ if (tDegree < 180) { // Starts At Circle 3
   setInterval(ArrowInCircle3, 1000);
 
 
-} else  if (tDegree >= 180 && tDegree < 360) { // Starts At Circle 4
+} else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
 
   function ArrowInCircle4() {
 
@@ -558,7 +557,7 @@ if (tDegree < 180) { // Starts At Circle 3
   ArrowInCircle4();
   setInterval(ArrowInCircle4, 1000);
 
-} else if (tDegree >= 360 && tDegree < 540 ) { // Starts At Circle 5
+} else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
   function ArrowInCircle5() {
 
@@ -573,9 +572,9 @@ if (tDegree < 180) { // Starts At Circle 3
   }
 
   ArrowInCircle5();
-  setInterval(ArrowInCircle5, 1000);
+  setInterval(ArrowInCircle5, 50);
 
-} else if (tDegree >= 540 && tDegree <= 720) { // Starts At Circle 6
+} else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
   function ArrowInCircle6() {
     if (tDegree > 540 && tDegree <= 720) {
