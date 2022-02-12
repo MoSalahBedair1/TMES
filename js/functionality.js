@@ -419,7 +419,7 @@ date =
 (month<10 ? '0' : '') + month + '/' + 
 d.getFullYear();
 
-// Getting The Current Time & Real Time Clock
+// Real Time Clock
 
 var
 span = document.getElementById('span'),
@@ -431,7 +431,7 @@ t,
 tHDegree,
 tMDegree,
 tSDegree,
-tDegree;
+tDegree = 1;
 
 class TDegree {
 
@@ -444,7 +444,8 @@ class TDegree {
     tHDegree = h * 30;
     tMDegree = m * 0.5;
     tSDegree = s * 0.0083333333333333;
-    tDegree = tHDegree + tMDegree + tSDegree;  
+    // tDegree = tHDegree + tMDegree + tSDegree;
+    tDegree++
   }
 }
 
@@ -512,9 +513,9 @@ function time() {
 };
 
 time()
-setInterval(time, 1000);;
+setInterval(time, 200);;
 
-// checking where the arrow is, to make a live analog clock
+/* checking where the arrow is, to make a live analog clock */
 
 if (tDegree <= 180) { // Starts At Circle 3
 
@@ -535,7 +536,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle3();
-  setInterval(ArrowInCircle3, 1000);
+  setInterval(ArrowInCircle3, 200);
 
 
 } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
@@ -555,7 +556,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle4();
-  setInterval(ArrowInCircle4, 1000);
+  setInterval(ArrowInCircle4, 200);
 
 } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
@@ -572,7 +573,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle5();
-  setInterval(ArrowInCircle5, 50);
+  setInterval(ArrowInCircle5, 200);
 
 } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
@@ -586,11 +587,11 @@ if (tDegree <= 180) { // Starts At Circle 3
 }
 
   ArrowInCircle6();
-  setInterval(ArrowInCircle6, 1000);
+  setInterval(ArrowInCircle6, 200);
 }
 
 
-// Tracking functionality
+/* Tracking functionality */
 
 $('.go-btn').click(function () {
 
@@ -628,7 +629,7 @@ $('.go-btn').click(function () {
 
       circle3Tracking() {
       $(`.fill${num}-circle3`).css({
-        'transform': `rotate(${tDegree})`
+        'transform': `rotate(${tDegree}deg)`
       });
     }
   
@@ -668,12 +669,11 @@ $('.go-btn').click(function () {
 
   circle4Tracking() {
     $(`.fill${num}-circle4`).css({
-      'transform': `rotate(${tDegree - 180})`
+      'transform': `rotate(${tDegree - 180}deg)`
     });
   }
 
-}
-
+  }
   class Circle5Add {
     circle5StartTrack() {
       $('.circle5').prepend(`<div 
@@ -705,15 +705,16 @@ $('.go-btn').click(function () {
       transform-origin: right center;
       transition: transform 0.5s linear;
       transform: rotate(${tDegree - 360}deg);'></div>`);
+
+      num++
     }
 
     circle5Tracking() {
       $(`.fill${num}-circle5`).css({
-        'transform': `rotate(${tDegree - 360})`
+        'transform': `rotate(${tDegree - 360}deg)`
       });
     }
   }
-
   class Circle6Add {
     circle6StartTrack() {
       $('.circle6').prepend(`<div 
@@ -745,6 +746,8 @@ $('.go-btn').click(function () {
     transform-origin: left center;
     transition: transform 0.5s linear;
     transform: rotate(${tDegree - 540}deg);'></div>`);
+
+    num++
     }
 
     circle6Tracking() {
@@ -767,29 +770,42 @@ $('.go-btn').click(function () {
     circle3Add.circle3StartTrack();
   } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
     circle4Add.circle4StartTrack();
-  } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
+  } else if (tDegree > 360 && tDegree <= 540) { // Starts At Circle 5
     circle5Add.circle5StartTrack();
   } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
     circle6Add.circle6StartTrack();
   }
 
-  function track() {
+  function track3() {
+    console.log(tDegree);
     if ($('.stp-btn').is(':visible')) {
       if (tDegree <= 180) { // Starts At Circle 3
         circle3Add.circle3Tracking();
-      } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
-        circle4Add.circle4Tracking();
-      } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
-        circle5Add.circle5Tracking();
-      } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
-        circle6Add.circle6Tracking();
+      } else if (tDegree > 180 && tDegree <= 360) { // From circl3 to Circle 4
+        circle4Add.circle4StartTrack();
+        clearInterval(track3);
+        track4();
+        setInterval(track4, 200);
       }
+    }
+  }
+  function track4() {
+    if ($('.stp-btn').is(':visible')) {
+      circle4Add.circle4Tracking();
     }
   }
 
   if ($('.stp-btn').is(':visible')) {
-    track();
-    setInterval(track, 1000);
+    if (tDegree <= 180) { // Starts At Circle 3
+      track3();
+      var track3 = setInterval(track3, 200);
+    } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
+      
+    } else if (tDegree > 360 && tDegree <= 540) { // Starts At Circle 5
+      
+    } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
+      
+    }
   }
 
 });
@@ -799,14 +815,22 @@ $('.go-btn').click(function () {
 
 $('.stp-btn').click(function () {
 
+  num++
   $('.go-btn').css('display', 'inline');
   $(this).css('display', 'none');
 
-  if ($('.stp-btn').is(':hidden')) {
-    console.log('hidden');
-  }
-
 });
 
 
 });
+
+/*        if (tDegree > 180 && tDegree <= 360) { // From circle 3 to circle 4
+          circle4Add.circle4StartTrack();
+          if (tDegree > 360 && tDegree <= 540 ) { // From circle 3 to Circle 5
+            circle4Add.circle4StartTrack();
+            if (tDegree > 540 && tDegree <= 720) { // From circle 3 to Circle 6
+              circle4Add.circle4StartTrack();
+            }
+          }
+        } 
+*/
