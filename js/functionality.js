@@ -422,6 +422,7 @@ d.getFullYear();
 
 var
 span = document.getElementById('span'),
+trackerSpan = document.getElementById('tracker'),
 d,
 h,
 m,
@@ -432,18 +433,19 @@ tMDegree,
 tSDegree,
 tDegree = 0;
 
-class TDegree {
+class TDegree { 
 
     newTdegree() {
     d = new Date();
     h = d.getHours();
     m = d.getMinutes();
     s = d.getSeconds();
-  
+
     tHDegree = h * 30;
     tMDegree = m * 0.5;
     tSDegree = s * 0.0083333333333333;
-    tDegree = tHDegree + tMDegree + tSDegree;
+    // tDegree = tHDegree + tMDegree + tSDegree;
+    tDegree = tDegree + 0.0083333333333333;
   }
 }
 
@@ -512,7 +514,7 @@ function time() {
 };
 
 time();
-setInterval(time, 1000);
+setInterval(time, 10);
 
 /* checking where the arrow is, to make a live analog clock */
 
@@ -535,7 +537,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle3();
-  setInterval(ArrowInCircle3, 1000);
+  setInterval(ArrowInCircle3, 10);
 
 
 } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
@@ -555,7 +557,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle4();
-  setInterval(ArrowInCircle4, 1000);
+  setInterval(ArrowInCircle4, 10);
 
 } else if (tDegree > 360 && tDegree <= 540 ) { // Starts At Circle 5
 
@@ -572,7 +574,7 @@ if (tDegree <= 180) { // Starts At Circle 3
   }
 
   ArrowInCircle5();
-  setInterval(ArrowInCircle5, 1000);
+  setInterval(ArrowInCircle5, 10);
 
 } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
 
@@ -586,7 +588,7 @@ if (tDegree <= 180) { // Starts At Circle 3
 }
 
   ArrowInCircle6();
-  setInterval(ArrowInCircle6, 1000);
+  setInterval(ArrowInCircle6, 10);
 }
 
 
@@ -594,7 +596,37 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 $('.go-btn').click(function () {
 
+  $('#tracker').css('display','inline');
+  $('.go-btn').css('display','none');
+
   color = $('.from-to-color').val();
+
+  trackedSeconds = 0;
+  trackedMinutes = 0;
+  trackedHours = 0;
+
+  function trackedTime() {
+
+    trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+    trackerSpan.textContent = trackedTimeString;
+    
+    trackedSeconds++;
+
+    if (trackedSeconds == 60) {
+      trackedSeconds = 0;
+      trackedMinutes++;
+      if (trackedMinutes == 60) {
+        trackedMinutes = 0;
+        trackedHours++
+      }
+    }
+
+
+  }
+
+  trackedTime();
+  trackedTimeInterval = setInterval(trackedTime, 10)
 
   class Circle3Add {
 
@@ -610,7 +642,7 @@ $('.go-btn').click(function () {
       top: -3px;
       transform-origin: right center;
       transition: transform 0.5s linear;
-      transform: rotate(${tDegree}deg);'></div>`);
+      transform: rotate(${tDegree * 0}deg);'></div>`);
 
       $('.circle3').prepend(`<div
       class='fill${num}-circle3'
@@ -647,7 +679,7 @@ $('.go-btn').click(function () {
     top: -3px;
     transform-origin: left center;
     transition: transform 0.5s linear;
-    transform: rotate(${tDegree - 180}deg);'></div>`);
+    transform: rotate(${tDegree * 0}deg);'></div>`);
 
   if (tDegree == 180) {
     $('.circle4 .empty[style*=0deg]').remove();
@@ -688,7 +720,7 @@ $('.go-btn').click(function () {
         top: -3px;
         transform-origin: right center;
         transition: transform 0.5s linear;
-        transform: rotate(${tDegree - 360}deg);'></div>`);
+        transform: rotate(${tDegree * 0}deg);'></div>`);
 
       if (tDegree == 360) {
         $('.circle5 .empty[style*=0deg]').remove();
@@ -728,7 +760,7 @@ $('.go-btn').click(function () {
       top: -3px;
       transform-origin: left center;
       transition: transform 0.5s linear;
-      transform: rotate(${tDegree - 540}deg);'></div>`);
+      transform: rotate(${tDegree * 0}deg);'></div>`);
 
     if (tDegree == 540) {
       $('.circle6 .empty[style*=0deg]').remove();
@@ -759,8 +791,7 @@ $('.go-btn').click(function () {
   circle5Add = new Circle5Add;
   circle6Add = new Circle6Add;
 
-  $('.stp-btn').css('display','inline');
-  $('.go-btn').css('display','none');
+  // $('.stp-btn').css('display','inline');
 
   if (tDegree <= 180) { // Starts At Circle 3
     circle3Add.circle3StartTrack();
@@ -773,41 +804,41 @@ $('.go-btn').click(function () {
   }
 
   function track3() {
-    if ($('.stp-btn').is(':visible')) {
+    if ($('#tracker').is(':visible')) {
       if (tDegree <= 180) { // Starts At Circle 3
         circle3Add.circle3Tracking();
       } else if (tDegree > 180 && tDegree <= 360) { // From circl3 to Circle 4
         circle4Add.circle4StartTrack();
         clearInterval(tracker3);
         track4();
-        tracker4 = setInterval(track4, 1000);
+        tracker4 = setInterval(track4, 10);
       }
     }
   }
   function track4() {
-    if ($('.stp-btn').is(':visible')) {
+    if ($('#tracker').is(':visible')) {
       circle4Add.circle4Tracking();
       if (tDegree > 360 && tDegree <= 540) { // From circle 4 to circle 5
         circle5Add.circle5StartTrack();
         clearInterval(tracker4);
         track5();
-        tracker5 = setInterval(track5, 1000);
+        tracker5 = setInterval(track5, 10);
       }
     }
   }
   function track5() {
-    if ($('.stp-btn').is(':visible')) {
+    if ($('#tracker').is(':visible')) {
       circle5Add.circle5Tracking();
       if (tDegree > 540 && tDegree <= 720) { // From circle 5 to circle 6
         circle6Add.circle6StartTrack();
         clearInterval(tracker5);
         track6();
-        tracker6 = setInterval(track6, 1000);
+        tracker6 = setInterval(track6, 10);
       }
     } 
   }
   function track6() {
-    if ($('.stp-btn').is(':visible')) {
+    if ($('#tracker').is(':visible')) {
       circle6Add.circle6Tracking();
       if (tDegree == 720) {
         clearInterval(tracker6);
@@ -815,26 +846,40 @@ $('.go-btn').click(function () {
     }
   }
 
-  if ($('.stp-btn').is(':visible')) {
+  if ($('#tracker').is(':visible')) {
     if (tDegree <= 180) { // Starts At Circle 3
       track3();
-      tracker3 = setInterval(track3, 1000);
+      tracker3 = setInterval(track3, 10);
     } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
-      
+      track4();
+      tracker4 = setInterval(track4, 10);
     } else if (tDegree > 360 && tDegree <= 540) { // Starts At Circle 5
-      
+      track5();
+      tracker5 = setInterval(track5, 10);
     } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
-      
+      track6();
+      tracker6 = setInterval(track6, 10);
     }
   }
 
 });
+
+/* Stop Button */
+
+$('#tracker').hover(function () {
+  $('.stp-btn').fadeIn(500);
+});
+
+$('.stp-btn').hover(function(){}, function () {
+  $('.stp-btn').fadeOut(500);
+})
 
 
 /* Stop Tracking */
 
 $('.stp-btn').click(function () {
 
+  clearInterval(trackedTimeInterval);
   num++
   $('.go-btn').css('display', 'inline');
   $(this).css('display', 'none');
