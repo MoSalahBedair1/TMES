@@ -596,10 +596,10 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 $('.go-btn').click(function () {
 
-  $('#tracker').css('display','inline');
   $('.go-btn').css('display','none');
+  $('#tracker').css('display','inline');
 
-  color = $('.from-to-color').val();
+  color = $('.tracking-fill-color').val();
 
   trackedSeconds = 0;
   trackedMinutes = 0;
@@ -642,7 +642,7 @@ $('.go-btn').click(function () {
       top: -3px;
       transform-origin: right center;
       transition: transform 0.5s linear;
-      transform: rotate(${tDegree * 0}deg);'></div>`);
+      transform: rotate(${tDegree}deg);'></div>`);
 
       $('.circle3').prepend(`<div
       class='fill${num}-circle3'
@@ -679,7 +679,7 @@ $('.go-btn').click(function () {
     top: -3px;
     transform-origin: left center;
     transition: transform 0.5s linear;
-    transform: rotate(${tDegree * 0}deg);'></div>`);
+    transform: rotate(${tDegree - 180}deg);'></div>`);
 
   if (tDegree == 180) {
     $('.circle4 .empty[style*=0deg]').remove();
@@ -720,7 +720,7 @@ $('.go-btn').click(function () {
         top: -3px;
         transform-origin: right center;
         transition: transform 0.5s linear;
-        transform: rotate(${tDegree * 0}deg);'></div>`);
+        transform: rotate(${tDegree - 360}deg);'></div>`);
 
       if (tDegree == 360) {
         $('.circle5 .empty[style*=0deg]').remove();
@@ -760,7 +760,7 @@ $('.go-btn').click(function () {
       top: -3px;
       transform-origin: left center;
       transition: transform 0.5s linear;
-      transform: rotate(${tDegree * 0}deg);'></div>`);
+      transform: rotate(${tDegree - 540}deg);'></div>`);
 
     if (tDegree == 540) {
       $('.circle6 .empty[style*=0deg]').remove();
@@ -790,8 +790,6 @@ $('.go-btn').click(function () {
   circle4Add = new Circle4Add;
   circle5Add = new Circle5Add;
   circle6Add = new Circle6Add;
-
-  // $('.stp-btn').css('display','inline');
 
   if (tDegree <= 180) { // Starts At Circle 3
     circle3Add.circle3StartTrack();
@@ -867,23 +865,63 @@ $('.go-btn').click(function () {
 /* Stop Button */
 
 $('#tracker').hover(function () {
-  $('.stp-btn').fadeIn(500);
+  $('.stp-btn').fadeIn(800);
+  window.setTimeout(() => {$('.add-time').css('left', '50%')}, 50);
+  window.setTimeout(() => {$('.settings').css('left', '50%')}, 50);
+  window.setTimeout(() => {$('.color-picker-go').css('top', '45%')}, 50);
 });
 
 $('.stp-btn').hover(function(){}, function () {
-  $('.stp-btn').fadeOut(500);
-})
+  $('.stp-btn').fadeOut(300);
+});
+
+/* Animating the add and settings buttons */
+
+$('.go-btn').hover(function () {
+  console.log('hovered on go-btn');
+  window.setTimeout(() => {$('.add-time').css('left', '70%')}, 50);
+  window.setTimeout(() => {$('.settings').css('left', '30%')}, 50);
+  window.setTimeout(() => {$('.task-name').fadeIn(500)}, 50);
+  window.setTimeout(() => {$('.color-picker-go').css('top', '65%')}, 50);
+  function arrowsAnimation() {
+    $('.color-arrow-three').fadeOut(300, function () { // +
+      $('.color-arrow-three').fadeIn(300); // +
+      $('.color-arrow-two').fadeOut(150, function () {
+        $('.color-arrow-two').fadeIn(300); // +
+        $('.color-arrow-one').fadeOut(150, function () {
+          $('.color-arrow-one').fadeIn(300); // +
+        });
+      });
+    });
+  }
+  arrowsAnimation();
+  arrsAnima = setInterval(arrowsAnimation, 1200);
+
+});
 
 
 /* Stop Tracking */
 
 $('.stp-btn').click(function () {
 
+  $('#tracker').css('display', 'none');
   clearInterval(trackedTimeInterval);
   num++
   $('.go-btn').css('display', 'inline');
   $(this).css('display', 'none');
 
+});
+
+/* Add time entry button */
+
+$('.add-time').click(function () {
+  window.setTimeout(() => {$('.add-time').css('left', '50%').fadeOut(550)}, 50);
+  window.setTimeout(() => {$('.settings').css('left', '50%').fadeOut(550)}, 50);
+  window.setTimeout(() => {$('.color-picker-go').css('top', '45%').fadeOut(550)}, 50);
+  window.setTimeout(() => {
+    $('.go-ring, .go-border').fadeOut(10);
+    $('.add-time, .settings, .color-picker-go, .go-btn').fadeOut(500);}, 300);
+  window.setTimeout(() => {$('.from-to').fadeIn(500)}, 450)
 });
 
 
