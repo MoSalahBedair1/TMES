@@ -197,10 +197,10 @@ class Circle4Add {
     }
 
     $('.circle4').prepend(`<div 
-    class='fill${num}' 
+    class='fill${num}-circle4' 
     style='
     width: 133px;
-    height: 266;
+    height: 266px;
     background-color: ${color};
     position: absolute;
     left: 100%;
@@ -218,7 +218,7 @@ class Circle5Add {
     class='fill${num}-circle5'
     style='
     width: 166.25px;
-    height: 332.5;
+    height: 332.5px;
     background-color: ${color};
     position: absolute;
     right: 100%;
@@ -249,7 +249,7 @@ class Circle5Add {
     }
 
     $('.circle5').prepend(`<div 
-    class='fill${num}' 
+    class='fill${num}-circle5' 
     style='
     width: 166.25px;
     height: 332.5px;
@@ -327,14 +327,14 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
   
     circle4Add.circle4AddType2()
     storedFromH = fromH;
-    window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${(StartPosition - 180) + totalDeg}deg)`);num++}, 50);
+    window.setTimeout(() => {$(`.fill${num}-circle4`).css('transform',`rotate(${(StartPosition - 180) + totalDeg}deg)`);num++}, 50);
 
   } else if (StartPosition >= 180 && StartPosition < 360 && EndPosition > 360 && EndPosition <= 540) { // Start In Circle4 And End In Circle5
 
     var complete2 = 180 - (StartPosition - 180) // To Complete from start position in circle4 to the end of cirlce4
     circle4Add.circle4AddType2()
     storedFromH = fromH;
-    window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${(StartPosition - 180) + complete2}deg)`)}, 50);
+    window.setTimeout(() => {$(`.fill${num}-circle4`).css('transform',`rotate(${(StartPosition - 180) + complete2}deg)`)}, 50);
     circle5Add.circle5AddFill();
     window.setTimeout(() => {$(`.fill${num}-circle5`).css('transform',`rotate(${EndPosition - 360}deg)`);num++}, 550);
 
@@ -343,7 +343,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
     var complete2 = 180 - (StartPosition - 180) // To Complete from start position in circle4 to the end of cirlce4
     circle4Add.circle4AddType2()
     storedFromH = fromH;
-    window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${(StartPosition - 180) + complete2}deg)`)}, 50);
+    window.setTimeout(() => {$(`.fill${num}-circle4`).css('transform',`rotate(${(StartPosition - 180) + complete2}deg)`)}, 50);
     circle5Add.circle5AddFill();
     window.setTimeout(() => {$(`.fill${num}-circle5`).css('transform',`rotate(${180}deg)`)}, 550);
     circle6Add.circle6AddFill();
@@ -353,13 +353,13 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
 
     circle5Add.circle5AddType2();
     storedFromH = fromH;
-    window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${ (StartPosition - 360) + totalDeg}deg)`);num++}, 50);
+    window.setTimeout(() => {$(`.fill${num}-circle5`).css('transform',`rotate(${ (StartPosition - 360) + totalDeg}deg)`);num++}, 50);
 
   } else if (StartPosition >= 360 && StartPosition < 540 && EndPosition > 540 && EndPosition <= 720) { // Start In Circle5 And End In Circle6
 
     circle5Add.circle5AddType2();
     storedFromH = fromH;
-    window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${180}deg)`)}, 50);
+    window.setTimeout(() => {$(`.fill${num}-circle5`).css('transform',`rotate(${180}deg)`)}, 50);
     circle6Add.circle6AddFill();
     window.setTimeout(() => {$(`.fill${num}-circle6`).css('transform',`rotate(${EndPosition - 540}deg)`);num++}, 550);
 
@@ -396,7 +396,7 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
     transition: transform 0.5s linear;
     transform: rotate(${StartPosition - 540}deg);'></div>`);
 
-    window.setTimeout(() => {$(`.fill${num}`).css('transform',`rotate(${(StartPosition - 540) + totalDeg}deg)`);num++}, 50);
+    window.setTimeout(() => {$(`.fill${num}-circle6`).css('transform',`rotate(${(StartPosition - 540) + totalDeg}deg)`);num++}, 50);
 
   }
 
@@ -594,23 +594,48 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 /* Tracking functionality */
 
+/* Pomodoro functionality */
+
+if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+
+}
+
+  $('.tracking-fill-color').change(function () {
+    color = $('.tracking-fill-color').val();
+    $('.go-btn').css('background-color', color);
+    $('#tracker').css('background-color', color);
+  });
+
+  /* Go button */
+
 $('.go-btn').click(function () {
 
+  $('.task-name').prop('disabled', true);
   $('.go-btn').css('display','none');
+  $('.stp-btn-border').css({
+    'background-color': '#f44336',
+    'transform': 'translate(-50%, -50%) scale(0.9)'
+  });
+  $('.go-ring').css('border', '3px solid #f44336');
   $('#tracker').css('display','inline');
 
   color = $('.tracking-fill-color').val();
 
+
+
   trackedSeconds = 0;
   trackedMinutes = 0;
   trackedHours = 0;
+  pomodoroSessions = 0;
 
-  function trackedTime() {
-
+  function firstSecond() {
     trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
 
     trackerSpan.textContent = trackedTimeString;
-    
+  }
+
+  function trackedTime() {
+
     trackedSeconds++;
 
     if (trackedSeconds == 60) {
@@ -622,10 +647,30 @@ $('.go-btn').click(function () {
       }
     }
 
+    trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+    trackerSpan.textContent = trackedTimeString;
+
+    if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+      pomodoroPeriod = $('#pomodoro-period').val();
+      shortBreak = $('#short-break').val();
+      longBreak = $('#long-break').val();
+
+      if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == pomodoroPeriod) {
+        clearInterval(trackedTimeInterval);
+        clearInterval(tracker3);
+        clearInterval(tracker4);
+        clearInterval(tracker5);
+        clearInterval(tracker6);
+        pomodoroSessions++;
+        
+      }
+
+    }
 
   }
 
-  trackedTime();
+  firstSecond();
   trackedTimeInterval = setInterval(trackedTime, 10)
 
   class Circle3Add {
@@ -865,38 +910,45 @@ $('.go-btn').click(function () {
 /* Stop Button */
 
 $('#tracker').hover(function () {
-  $('.stp-btn').fadeIn(800);
+  window.setTimeout(() => {$('.stp-btn-border').css({
+    'transform':'translate(-50%, -50%) scale(1)'
+  })}, 50);
   window.setTimeout(() => {$('.add-time').css('left', '50%')}, 50);
-  window.setTimeout(() => {$('.settings').css('left', '50%')}, 50);
+  window.setTimeout(() => {$('.settings-btn').css('left', '50%')}, 50);
   window.setTimeout(() => {$('.color-picker-go').css('top', '45%')}, 50);
+}, function () {
+  window.setTimeout(() => {$('.stp-btn-border').css({
+    'transform':'translate(-50%, -50%) scale(0.9)'
+  })}, 50);
 });
 
-$('.stp-btn').hover(function(){}, function () {
-  $('.stp-btn').fadeOut(300);
+/* Stop Tracking */
+
+$('#tracker').click(function () {
+  num++
+  $('.task-name').prop('disabled', false);
+  $('.go-btn').css('display', 'inline');
+  $(this).css('display', 'none');
+  $('.stp-btn-border').css('background-color', '#3ec03e');
+  $('.go-ring').css('border', '3px solid #3ec03e');
+
 });
 
 /* Animating the add and settings buttons */
 
 $('.go-btn').hover(function () {
   console.log('hovered on go-btn');
+  window.setTimeout(() => {$('.stp-btn-border').css({
+    'transform':'translate(-50%, -50%) scale(1)'
+  })}, 50);
   window.setTimeout(() => {$('.add-time').css('left', '70%')}, 50);
-  window.setTimeout(() => {$('.settings').css('left', '30%')}, 50);
+  window.setTimeout(() => {$('.settings-btn').css('left', '30%')}, 50);
   window.setTimeout(() => {$('.task-name').fadeIn(500)}, 50);
   window.setTimeout(() => {$('.color-picker-go').css('top', '65%')}, 50);
-  function arrowsAnimation() {
-    $('.color-arrow-three').fadeOut(300, function () { // +
-      $('.color-arrow-three').fadeIn(300); // +
-      $('.color-arrow-two').fadeOut(150, function () {
-        $('.color-arrow-two').fadeIn(300); // +
-        $('.color-arrow-one').fadeOut(150, function () {
-          $('.color-arrow-one').fadeIn(300); // +
-        });
-      });
-    });
-  }
-  arrowsAnimation();
-  arrsAnima = setInterval(arrowsAnimation, 1200);
-
+}, function () {
+  window.setTimeout(() => {$('.stp-btn-border').css({
+    'transform':'translate(-50%, -50%) scale(0.9)'
+  })}, 50);
 });
 
 
@@ -905,7 +957,6 @@ $('.go-btn').hover(function () {
 $('.stp-btn').click(function () {
 
   $('#tracker').css('display', 'none');
-  clearInterval(trackedTimeInterval);
   num++
   $('.go-btn').css('display', 'inline');
   $(this).css('display', 'none');
@@ -915,14 +966,65 @@ $('.stp-btn').click(function () {
 /* Add time entry button */
 
 $('.add-time').click(function () {
-  window.setTimeout(() => {$('.add-time').css('left', '50%').fadeOut(550)}, 50);
-  window.setTimeout(() => {$('.settings').css('left', '50%').fadeOut(550)}, 50);
-  window.setTimeout(() => {$('.color-picker-go').css('top', '45%').fadeOut(550)}, 50);
   window.setTimeout(() => {
-    $('.go-ring, .go-border').fadeOut(10);
-    $('.add-time, .settings, .color-picker-go, .go-btn').fadeOut(500);}, 300);
-  window.setTimeout(() => {$('.from-to').fadeIn(500)}, 450)
+    $('.go-btn').css('pointer-events', 'none');
+    $('.stp-btn-border').css('display', 'none');
+    $('.add-time').css('left', '50%').fadeOut(200);
+    $('.settings-btn').css('left', '50%').fadeOut(200);
+    $('.color-picker-go').css('top', '45%').fadeOut(200)}, 10);
+  window.setTimeout(() => {
+    $('.go-ring').fadeOut(10);
+    $('.go-btn').fadeOut(500);}, 300);
+  window.setTimeout(() => {$('.from-to, .add-go-back').fadeIn(500)}, 450);
 });
 
+/* Go Back to Go Button (from add time entry)*/
+
+$('.add-go-back').click(function () {
+  $('.go-btn').css('pointer-events', 'auto');
+  window.setTimeout(() => {$('.from-to, .add-go-back, .task-name').fadeOut(500)}, 100);
+  window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
+  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
+});
+
+/* Settings */
+
+/* Settings button */
+
+$('.settings-btn').click(function () {
+  window.setTimeout(() => {
+    $('.stp-btn-border').css('display', 'none');
+    $('.go-btn').css('pointer-events', 'none');
+    $('.add-time').css('left', '50%').fadeOut(200);
+    $('.settings-btn').css('left', '50%').fadeOut(200);
+    $('.color-picker-go').css('top', '45%').fadeOut(200);}, 10);
+  window.setTimeout(() => {
+    $('.go-ring').fadeOut(10);
+    $('.go-btn, .task-name').fadeOut(500);}, 300);
+  window.setTimeout(() => {$('.settings').fadeIn(500)}, 450);
+});
+
+/* Pomodoro Toggle Switch */
+$('#pomodoro-switch').change(function () {
+  if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+    $('#pomodoro-period, #short-break, #long-break').prop('disabled', false);
+  } else {
+    $('#pomodoro-period, #short-break, #long-break').prop('disabled', true);
+  };
+});
+
+/* Go Back to Go Button (from settings) */
+$('.settings-go-back').click(function () {
+  $('.go-btn').css('pointer-events', 'auto');
+  window.setTimeout(() => {$('.settings').fadeOut(500)}, 100);
+  window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
+  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
+});
+
+/*  */
+
+console.log($('#pomodoro-period').val(),
+$('#short-break').val(),
+$('#long-break').val());
 
 });
