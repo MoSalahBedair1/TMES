@@ -2,37 +2,35 @@ $(function () {
 
 /* === Start Spiraldex Section === */
 /* Start creating circles halfs */
-  class Circle {
-    constructor(circleName, circleWidth, noLeftSide) {
-        var
-        circleName = document.querySelector(`.${circleName}`),
-        circleWidth = circleWidth,
-        circleWidthPercent = circleWidth + '%',
-        circleHeight = circleWidth * 2,
-        circleHeightPercent = circleHeight + '%';
-        
-        circleName.style.width = `${circleWidthPercent}`;
-        circleName.style.height = `${circleHeightPercent}`;
+class Circle {
+  constructor(circleName, circleWidth, noLeftSide) {
+      var
+      circleName = document.querySelector(`.${circleName}`),
+      circleWidth = circleWidth,
+      circleWidthPercent = circleWidth + '%',
+      circleHeight = circleWidth * 2,
+      circleHeightPercent = circleHeight + '%';
+      
+      circleName.style.width = `${circleWidthPercent}`;
+      circleName.style.height = `${circleHeightPercent}`;
 
-        var 
-        circleHeightPx = circleName.getBoundingClientRect().height,
-        circleHeightPxString = circleHeightPx + 'px';
+      var 
+      circleHeightPx = circleName.getBoundingClientRect().height,
+      circleHeightPxString = circleHeightPx + 'px';
 
-        if (noLeftSide === true) {
+      if (noLeftSide === true) {
 
-          circleName.style.borderTopLeftRadius = 0;
-          circleName.style.borderTopRightRadius = circleHeightPxString;
-          circleName.style.borderBottomRightRadius = circleHeightPxString;
-          circleName.style.borderBottomLeftRadius = 0;
+        circleName.style.borderTopLeftRadius = 0;
+        circleName.style.borderTopRightRadius = circleHeightPxString;
+        circleName.style.borderBottomRightRadius = circleHeightPxString;
+        circleName.style.borderBottomLeftRadius = 0;
 
-        } else {
+      } else {
 
-          circleName.style.borderTopLeftRadius = circleHeightPxString;
-          circleName.style.borderTopRightRadius = 0;
-          circleName.style.borderBottomRightRadius = 0;
-          circleName.style.borderBottomLeftRadius = circleHeightPxString;
-
-        }
+        circleName.style.borderTopLeftRadius = circleHeightPxString;
+        circleName.style.borderTopRightRadius = 0;
+        circleName.style.borderBottomRightRadius = 0;
+        circleName.style.borderBottomLeftRadius = circleHeightPxString;        }
 
     }
   }
@@ -53,7 +51,7 @@ d,h,m,s,t,
 tSDegree,
 tMDegree,
 tHDegree,
-tDegree = 0;
+tDegree = 490;
 
 class TDegree { 
 
@@ -296,11 +294,11 @@ $('.go-btn').click(function () {
           'transform': `rotate(${tDegree}deg)`
         });
       }
-  
+
   }
   class Circle4Add {
 
-    circle4StartTrack() {
+  circle4StartTrack() {
     $('.circle4').prepend(`<div 
     class='empty'
     style='
@@ -334,6 +332,27 @@ $('.go-btn').click(function () {
 
   circle4Tracking() {
     $(`.fill${num}-circle4`).css({
+      'transform': `rotate(${tDegree - 180}deg)`
+    });
+  }
+
+  circle4BreakStartTrack() {
+    $('.circle4').prepend(`<div
+    class='fill${num}-break-circle4'
+    style='
+    width: 133px;
+    height: 266px;
+    background-color: ${color};
+    position: absolute;
+    left: 100%;
+    bottom: -3px;
+    transform-origin: left center;
+    transition: transform 0.5s linear;
+    transform: rotate(${tDegree - 180}deg);'></div>`);
+  }
+
+  circle4BreakTracking() {
+    $(`.fill${num}-break-circle4`).css({
       'transform': `rotate(${tDegree - 180}deg)`
     });
   }
@@ -378,6 +397,28 @@ $('.go-btn').click(function () {
         'transform': `rotate(${tDegree - 360}deg)`
       });
     }
+
+    circle5BreakStartTrack() {
+      $('.circle5').prepend(`<div 
+      class='fill${num}-break-circle5'
+      style='
+      width: 166.25px;
+      height: 332.5px;
+      background-color: ${color};
+      position: absolute;
+      right: 100%;
+      bottom: -3px;
+      transform-origin: right center;
+      transition: transform 0.5s linear;
+      transform: rotate(${tDegree - 360}deg);'></div>`);
+    }
+
+    circle5BreakTracking() {
+      $(`.fill${num}-break-circle5`).css({
+        'transform': `rotate(${tDegree - 360}deg)`
+      });
+    }
+
   }
   class Circle6Add {
 
@@ -416,6 +457,26 @@ $('.go-btn').click(function () {
     circle6Tracking() {
       $(`.fill${num}-circle6`).css('transform', `rotate(${tDegree - 540}deg)`);
     }
+
+    circle6BreakStartTrack() {
+      $('.circle6').prepend(`<div 
+      class='fill${num}-break-circle6'
+      style='
+      width: 199.5px;
+      height: 399px;
+      background-color: ${color};
+      position: absolute;
+      left: 100%;
+      bottom: -3px;
+      transform-origin: left center;
+      transition: transform 0.5s linear;
+      transform: rotate(${tDegree - 540}deg);'></div>`);
+    }
+
+    circle6BreakTracking() {
+      $(`.fill${num}-break-circle6`).css('transform', `rotate(${tDegree - 540}deg)`);
+    }
+
 
   }
 
@@ -493,6 +554,49 @@ $('.go-btn').click(function () {
     }
   }
 
+  function track3break() {
+    if ($('#tracker').is(':visible')) {
+      if (tDegree <= 180) { // Starts At Circle 3
+        circle3Add.circle3BreakTracking();
+      } else if (tDegree > 180 && tDegree <= 360) { // From circl3 to Circle 4
+        circle4Add.circle4BreakStartTrack();
+        clearInterval(breakTracker3);
+        track4break();
+        breakTracker4 = setInterval(track4break, 10);
+      }
+    }
+  }
+  function track4break() {
+    if ($('#tracker').is(':visible')) {
+      circle4Add.circle4BreakTracking();
+      if (tDegree > 360 && tDegree <= 540) { // From circle 4 to circle 5
+        circle5Add.circle5BreakStartTrack();
+        clearInterval(breakTracker4);
+        track5break();
+        breakTracker5 = setInterval(track5break, 10);
+      }
+    }
+  }
+  function track5break() {
+    if ($('#tracker').is(':visible')) {
+      circle5Add.circle5BreakTracking();
+      if (tDegree > 540 && tDegree <= 720) { // From circle 5 to circle 6
+        circle6Add.circle6BreakStartTrack();
+        clearInterval(breakTracker5);
+        track6break();
+        breakTracker6 = setInterval(track6break, 10);
+      }
+    } 
+  }
+  function track6break() {
+    if ($('#tracker').is(':visible')) {
+      circle6Add.circle6BreakTracking();
+      if (tDegree == 720) {
+        clearInterval(track6break);
+      }
+    }
+  }
+
   trackedSeconds = 0;
   trackedMinutes = 0;
   trackedHours = 0;
@@ -539,14 +643,23 @@ $('.go-btn').click(function () {
         if (tDegree <= 180) {
           clearInterval(tracker3);
           circle3Add.circle3BreakStartTrack();
-          circle3Add.circle3BreakTracking();
-          breakTracker3 = setInterval(circle3Add.circle3BreakTracking, 10);
+          track3break();
+          breakTracker3 = setInterval(track3break, 10);
         } else if (tDegree > 180 && tDegree <= 360) {
           clearInterval(tracker4);
+          circle4Add.circle4BreakStartTrack();
+          track4break();
+          breakTracker4 = setInterval(track4break, 10);
         } else if (tDegree > 360 && tDegree <= 540) {
           clearInterval(tracker5);
+          circle5Add.circle5BreakStartTrack();
+          track5break();
+          breakTracker5 = setInterval(track5break, 10);
         } else if (tDegree > 540 && tDegree <= 720) {
           clearInterval(tracker6);
+          circle6Add.circle6BreakStartTrack();
+          track6break();
+          breakTracker6 = setInterval(track6break, 10);
         }
 
         trackerSpan.textContent = 'Short Break?';
