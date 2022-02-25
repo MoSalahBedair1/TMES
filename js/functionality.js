@@ -50,9 +50,6 @@ var
 span = document.getElementById('span'),
 trackerSpan = document.getElementById('tracker'),
 d,h,m,s,t,
-tHDegree,
-tMDegree,
-tSDegree,
 tDegree = 0;
 
 class TDegree { 
@@ -1006,18 +1003,18 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
 
 });
 /* End add button */
-/* End add time entry section */
 
-/* Go Back to Go Button (from add time entry) */
+/* Start Back to Go Button (from add time entry) */
 $('.add-go-back').click(function () {
   $('.go-btn').css('pointer-events', 'auto');
   window.setTimeout(() => {$('.from-to, .add-go-back, .task-name').fadeOut(500)}, 100);
   window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
   window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
 });
-/* End back to ge button (from add time entry) */
+/* End back to go button (from add time entry) */
+/* End add time entry section */
 
-/* Start Settings */
+/* Start Settings section */
 /* Start Settings button */
 $('.settings-btn').click(function () {
   window.setTimeout(() => {
@@ -1033,7 +1030,7 @@ $('.settings-btn').click(function () {
 });
 /* End Settings button */
 
-/* Pomodoro Toggle Switch */
+/* Start Pomodoro Toggle Switch */
 $('#pomodoro-switch').change(function () {
   if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
     $('#pomodoro-period, #short-break, #long-break').prop('disabled', false);
@@ -1041,16 +1038,18 @@ $('#pomodoro-switch').change(function () {
     $('#pomodoro-period, #short-break, #long-break').prop('disabled', true);
   };
 });
+/* Start Pomodoro Toggle Switch */
 
-/* Go Back to Go Button (from settings) */
+/* Start Go Back to Go Button (from settings) */
 $('.settings-go-back').click(function () {
   $('.go-btn').css('pointer-events', 'auto');
   window.setTimeout(() => {$('.settings').fadeOut(500)}, 100);
   window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
   window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
 });
-/* End Settings */
-/* === Start Control Panel Section === */
+/* End Go Back to Go Button (from settings) */
+/* End Settings section */
+/* === End Control Panel Section === */
 
 });
 
