@@ -240,107 +240,6 @@ $('.go-btn').click(function () {
 
   color = $('.tracking-fill-color').val();
 
-  trackedSeconds = 0;
-  trackedMinutes = 0;
-  trackedHours = 0;
-  pomodoroSessions = 0;
-
-  function firstSecond() {
-
-    trackedSeconds = 0;
-    trackedMinutes = 0;
-    trackedHours = 0;
-
-    trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
-
-    trackerSpan.textContent = trackedTimeString;
-  }
-
-  function trackedTime() {
-
-    trackedSeconds++;
-
-    if (trackedSeconds == 60) {
-      trackedSeconds = 0;
-      trackedMinutes++;
-      if (trackedMinutes == 60) {
-        trackedMinutes = 0;
-        trackedHours++
-      }
-    }
-
-    trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
-
-    trackerSpan.textContent = trackedTimeString;
-
-    /* Pomodoro functionality */
-    if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
-      pomodoroPeriod = $('#pomodoro-period').val();
-      shortBreak = $('#short-break').val();
-      longBreak = $('#long-break').val();
-
-      if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == pomodoroPeriod) {
-
-        pomodoroSessions++;
-        clearInterval(trackedTimeInterval);
-        if (tDegree <= 180) {
-          clearInterval(tracker3);
-        } else  if (tDegree > 180 && tDegree <= 360) {
-          clearInterval(tracker4);
-        } else if (tDegree > 360 && tDegree <= 540) {
-          clearInterval(tracker5);
-        } else if (tDegree > 540 && tDegree <= 720) {
-          clearInterval(tracker6);
-        }
-
-        trackerSpan.textContent = 'Short Break?';
-        $('#tracker').css({
-          'font-size': '22px',
-          'font-weight': 'bold'
-        });
-
-        // if (trackerSpan.textContent == 'Short Break?') {
-
-        //   trackerSpan.click(function () {
-
-        //     function shortBreakMethod() {
-
-        //     trackedSeconds++;
-
-        //     if (trackedSeconds == 60) {
-        //       trackedSeconds = 0;
-        //       trackedMinutes++;
-        //       if (trackedMinutes == 60) {
-        //         trackedMinutes = 0;
-        //         trackedHours++
-        //       }
-        //     }
-
-        //     trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
-
-        //     trackerSpan.textContent = trackedTimeString;
-
-        //     if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
-        //       clearInterval(shortBreakMethodInterval);
-        //       trackerSpan.textContent = 'GO';
-        //     }
-
-        //     }
-
-        //     firstSecond();
-        //     shortBreakMethodInterval = setInterval(shortBreakMethod, 10);
-
-        //   });
-        // }
-      }
-    }
-  }
-
-  firstSecond();
-  trackedTimeInterval = setInterval(trackedTime, 10);
-
-
-
   class Circle3Add {
 
     circle3StartTrack() {
@@ -371,11 +270,32 @@ $('.go-btn').click(function () {
       transform: rotate(${tDegree}deg);'></div>`);
     }
 
-      circle3Tracking() {
+    circle3Tracking() {
       $(`.fill${num}-circle3`).css({
         'transform': `rotate(${tDegree}deg)`
       });
     }
+
+    circle3BreakStartTrack() {
+        $('.circle3').prepend(`<div
+        class='fill${num}-break-circle3'
+        style='
+        width: 99.75px;
+        height: 199.5px;
+        background-color: ${color}80;
+        position: absolute;
+        right: 100%;
+        top: -3px;
+        transform-origin: right center;
+        transition: transform 0.5s linear;
+        transform: rotate(${tDegree}deg);'></div>`);
+      }
+
+    circle3BreakTracking() {
+        $(`.fill${num}-break-circle3`).css({
+          'transform': `rotate(${tDegree}deg)`
+        });
+      }
   
   }
   class Circle4Add {
@@ -504,16 +424,6 @@ $('.go-btn').click(function () {
   circle5Add = new Circle5Add;
   circle6Add = new Circle6Add;
 
-  if (tDegree <= 180) { // Starts At Circle 3
-    circle3Add.circle3StartTrack();
-  } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
-    circle4Add.circle4StartTrack();
-  } else if (tDegree > 360 && tDegree <= 540) { // Starts At Circle 5
-    circle5Add.circle5StartTrack();
-  } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
-    circle6Add.circle6StartTrack();
-  }
-
   function track3() {
     if ($('#tracker').is(':visible')) {
       if (tDegree <= 180) { // Starts At Circle 3
@@ -557,6 +467,16 @@ $('.go-btn').click(function () {
     }
   }
 
+  if (tDegree <= 180) { // Starts At Circle 3
+    circle3Add.circle3StartTrack();
+  } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
+    circle4Add.circle4StartTrack();
+  } else if (tDegree > 360 && tDegree <= 540) { // Starts At Circle 5
+    circle5Add.circle5StartTrack();
+  } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
+    circle6Add.circle6StartTrack();
+  }
+
   if ($('#tracker').is(':visible')) {
     if (tDegree <= 180) { // Starts At Circle 3
       track3();
@@ -572,6 +492,108 @@ $('.go-btn').click(function () {
       tracker6 = setInterval(track6, 10);
     }
   }
+
+  trackedSeconds = 0;
+  trackedMinutes = 0;
+  trackedHours = 0;
+  pomodoroSessions = 0;
+
+  function firstSecond() {
+
+    trackedSeconds = 0;
+    trackedMinutes = 0;
+    trackedHours = 0;
+
+    trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+    trackerSpan.textContent = trackedTimeString;
+  }
+
+  function trackedTime() {
+
+    trackedSeconds++;
+
+    if (trackedSeconds == 60) {
+      trackedSeconds = 0;
+      trackedMinutes++;
+      if (trackedMinutes == 60) {
+        trackedMinutes = 0;
+        trackedHours++
+      }
+    }
+
+    trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+    trackerSpan.textContent = trackedTimeString;
+
+    /* Start Pomodoro functionality */
+    if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+      pomodoroPeriod = $('#pomodoro-period').val();
+      shortBreak = $('#short-break').val();
+      longBreak = $('#long-break').val();
+
+      if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == pomodoroPeriod) {
+
+        pomodoroSessions++;
+        clearInterval(trackedTimeInterval);
+        if (tDegree <= 180) {
+          clearInterval(tracker3);
+          circle3Add.circle3BreakStartTrack();
+          circle3Add.circle3BreakTracking();
+          breakTracker3 = setInterval(circle3Add.circle3BreakTracking, 10);
+        } else if (tDegree > 180 && tDegree <= 360) {
+          clearInterval(tracker4);
+        } else if (tDegree > 360 && tDegree <= 540) {
+          clearInterval(tracker5);
+        } else if (tDegree > 540 && tDegree <= 720) {
+          clearInterval(tracker6);
+        }
+
+        trackerSpan.textContent = 'Short Break?';
+        $('#tracker').css({
+          'font-size': '22px',
+          'font-weight': 'bold'
+        });
+
+        // if (trackerSpan.textContent == 'Short Break?') {
+
+        //   trackerSpan.click(function () {
+
+        //     function shortBreakMethod() {
+
+        //     trackedSeconds++;
+
+        //     if (trackedSeconds == 60) {
+        //       trackedSeconds = 0;
+        //       trackedMinutes++;
+        //       if (trackedMinutes == 60) {
+        //         trackedMinutes = 0;
+        //         trackedHours++
+        //       }
+        //     }
+
+        //     trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+        //     trackerSpan.textContent = trackedTimeString;
+
+        //     if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
+        //       clearInterval(shortBreakMethodInterval);
+        //       trackerSpan.textContent = 'GO';
+        //     }
+
+        //     }
+
+        //     firstSecond();
+        //     shortBreakMethodInterval = setInterval(shortBreakMethod, 10);
+
+        //   });
+        // }
+      }
+    }
+  }
+
+  firstSecond();
+  trackedTimeInterval = setInterval(trackedTime, 10);
 
 });
 
