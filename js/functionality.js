@@ -594,34 +594,45 @@ if (tDegree <= 180) { // Starts At Circle 3
 
 /* Tracking functionality */
 
-/* Pomodoro functionality */
+/* changing the color of the main buttons with color palette */
 
-if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+$('.tracking-fill-color').change(function () {
+  color = $('.tracking-fill-color').val();
+  $('.go-btn').css('background-color', color);
+  $('#tracker').css('background-color', color);
+});
 
-}
-
-  $('.tracking-fill-color').change(function () {
-    color = $('.tracking-fill-color').val();
-    $('.go-btn').css('background-color', color);
-    $('#tracker').css('background-color', color);
-  });
-
-  /* Go button */
+/* Go button */
 
 $('.go-btn').click(function () {
 
   $('.task-name').prop('disabled', true);
   $('.go-btn').css('display','none');
+  $('.go-ring').css('border', '3px solid #f44336');
+  $('#tracker').css('display','inline');
   $('.stp-btn-border').css({
     'background-color': '#f44336',
     'transform': 'translate(-50%, -50%) scale(0.9)'
   });
-  $('.go-ring').css('border', '3px solid #f44336');
-  $('#tracker').css('display','inline');
 
   color = $('.tracking-fill-color').val();
 
+/*  class Tracking {
 
+
+    constructor() {
+      trackedSeconds = 0;
+      trackedMinutes = 0;
+      trackedHours = 0;
+
+      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+      trackerSpan.textContent = trackedTimeString;
+    }
+
+
+
+  } */
 
   trackedSeconds = 0;
   trackedMinutes = 0;
@@ -629,6 +640,11 @@ $('.go-btn').click(function () {
   pomodoroSessions = 0;
 
   function firstSecond() {
+
+    trackedSeconds = 0;
+    trackedMinutes = 0;
+    trackedHours = 0;
+
     trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
 
     trackerSpan.textContent = trackedTimeString;
@@ -651,27 +667,73 @@ $('.go-btn').click(function () {
 
     trackerSpan.textContent = trackedTimeString;
 
+    /* Pomodoro functionality */
     if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
       pomodoroPeriod = $('#pomodoro-period').val();
       shortBreak = $('#short-break').val();
       longBreak = $('#long-break').val();
 
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == pomodoroPeriod) {
-        clearInterval(trackedTimeInterval);
-        clearInterval(tracker3);
-        clearInterval(tracker4);
-        clearInterval(tracker5);
-        clearInterval(tracker6);
+
         pomodoroSessions++;
-        
+        clearInterval(trackedTimeInterval);
+        if (tDegree <= 180) {
+          clearInterval(tracker3);
+        } else  if (tDegree > 180 && tDegree <= 360) {
+          clearInterval(tracker4);
+        } else if (tDegree > 360 && tDegree <= 540) {
+          clearInterval(tracker5);
+        } else if (tDegree > 540 && tDegree <= 720) {
+          clearInterval(tracker6);
+        }
+
+        trackerSpan.textContent = 'Short Break?';
+        $('#tracker').css({
+          'font-size': '22px',
+          'font-weight': 'bold'
+        });
+
+        // if (trackerSpan.textContent == 'Short Break?') {
+
+        //   trackerSpan.click(function () {
+
+        //     function shortBreakMethod() {
+
+        //     trackedSeconds++;
+
+        //     if (trackedSeconds == 60) {
+        //       trackedSeconds = 0;
+        //       trackedMinutes++;
+        //       if (trackedMinutes == 60) {
+        //         trackedMinutes = 0;
+        //         trackedHours++
+        //       }
+        //     }
+
+        //     trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+        //     trackerSpan.textContent = trackedTimeString;
+
+        //     if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
+        //       clearInterval(shortBreakMethodInterval);
+        //       trackerSpan.textContent = 'GO';
+        //     }
+
+        //     }
+
+        //     firstSecond();
+        //     shortBreakMethodInterval = setInterval(shortBreakMethod, 10);
+
+        //   });
+        // }
       }
-
     }
-
   }
 
   firstSecond();
-  trackedTimeInterval = setInterval(trackedTime, 10)
+  trackedTimeInterval = setInterval(trackedTime, 10);
+
+
 
   class Circle3Add {
 
@@ -907,33 +969,6 @@ $('.go-btn').click(function () {
 
 });
 
-/* Stop Button */
-
-$('#tracker').hover(function () {
-  window.setTimeout(() => {$('.stp-btn-border').css({
-    'transform':'translate(-50%, -50%) scale(1)'
-  })}, 50);
-  window.setTimeout(() => {$('.add-time').css('left', '50%')}, 50);
-  window.setTimeout(() => {$('.settings-btn').css('left', '50%')}, 50);
-  window.setTimeout(() => {$('.color-picker-go').css('top', '45%')}, 50);
-}, function () {
-  window.setTimeout(() => {$('.stp-btn-border').css({
-    'transform':'translate(-50%, -50%) scale(0.9)'
-  })}, 50);
-});
-
-/* Stop Tracking */
-
-$('#tracker').click(function () {
-  num++
-  $('.task-name').prop('disabled', false);
-  $('.go-btn').css('display', 'inline');
-  $(this).css('display', 'none');
-  $('.stp-btn-border').css('background-color', '#3ec03e');
-  $('.go-ring').css('border', '3px solid #3ec03e');
-
-});
-
 /* Animating the add and settings buttons */
 
 $('.go-btn').hover(function () {
@@ -951,15 +986,49 @@ $('.go-btn').hover(function () {
   })}, 50);
 });
 
+/* Tracker Button */
 
-/* Stop Tracking */
+$('#tracker').hover(function () {
+  window.setTimeout(() => {
+    $('.stp-btn-border').css({'transform':'translate(-50%, -50%) scale(1)'});
+    $('.add-time').css('left', '50%');
+    $('.settings-btn').css('left', '50%');
+    $('.color-picker-go').css('top', '45%');
+    $('#tracker').addClass('show-stop');
+  }, 50);
 
-$('.stp-btn').click(function () {
+  if($( '#pomodoro-switch').prop( "checked" ) == true) {
+    $('.cancel-pomodoro-session').css('display', 'inline');
+    window.setTimeout(() => {
+      $('.cancel-pomodoro-session').css('top', '68%');
+    }, 50);
+  }
 
-  $('#tracker').css('display', 'none');
+}, function () {
+  window.setTimeout(() => {
+    $('.stp-btn-border').css({'transform':'translate(-50%, -50%) scale(0.9)'});
+      window.setTimeout(() => {$('#tracker').removeClass('show-stop');}, 50);
+  }, 50);
+});
+
+$('#tracker').click(function () {
   num++
-  $('.go-btn').css('display', 'inline');
   $(this).css('display', 'none');
+  $('.task-name').prop('disabled', false);
+  $('.go-btn').css('display', 'inline');
+  $('.stp-btn-border').css('background-color', '#3ec03e');
+  $('.go-ring').css('border', '3px solid #3ec03e');
+
+  if ($('.cancel-pomodoro-session').is(':visible')) {
+    window.setTimeout(() => {$('.cancel-pomodoro-session').css('top', '50%').fadeOut(500)}, 50);
+
+    // if (trackerSpan.textContent == 'GO') {
+
+    //   firstSecond();
+    //   trackedTimeInterval = setInterval(trackedTime, 10);
+
+    // }
+  }
 
 });
 
@@ -1020,11 +1089,5 @@ $('.settings-go-back').click(function () {
   window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
   window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
 });
-
-/*  */
-
-console.log($('#pomodoro-period').val(),
-$('#short-break').val(),
-$('#long-break').val());
 
 });

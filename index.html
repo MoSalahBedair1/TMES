@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>T.M.E.S</title>
     <!-- Main Style -->
     <link rel="stylesheet" href="css/spiraldex.css" />
     <!-- normalize -->
@@ -15,6 +15,7 @@
     <script src="js/momentum.js"></script>
   </head>
   <body>
+    <!-- Start Spiraldex Section -->
     <div class="time">
       <div class="spiraldex">
         <div class="clock-arrow-3-5"></div>
@@ -42,9 +43,15 @@
         <div class="circle6"></div>
       </div>
     </div>
+    <!-- End Spiraldex Section -->
+
+    <!-- Start Control Panel Section -->
     <div class="control-panel">
       <form class="form">
         <!-- Every color in the spiraldex will be added be prepend instead of using the z-index -->
+        <input type="text" class="task-name" placeholder="Type Task Name">
+
+        <!-- Start Add Time Entry Section -->
         <div class="from-to">
           <div class="from">
             <label for="from-hours">From</label>
@@ -90,26 +97,27 @@
           </div>
           <span class="add">ADD</span>
         </div>
-
         <span class="add-go-back"><i class="fa fa-angle-left"></i></span>
+        <!-- End Add Time Entry Section -->
 
-
-        <input type="text" class="task-name" placeholder="Type Task Name">
-
+        <!-- Start Main Button Section -->
         <span class="add-time">+</span>
         <span class="settings-btn"><i class="fa fa-cog"></i></span>
-
         <div class="color-picker-go">
         <input type="color" class="tracking-fill-color" value="#0275d8" />
         </div>
-
+        <span class="cancel-pomodoro-session"><i class="fa fa-times"></i></span>
+        
         <span class="go-ring"></span>
         <span class="stp-btn-border"></span>
-        <span class="go-btn">GO</span>
-        <span id="tracker"></span>
-        <span class="stp-btn">STOP</span>
 
-        <!-- Settings -->
+        <span class="go-btn">GO</span>
+        <span id="tracker" class="show-stop"></span>
+        <span class="stp-btn">STOP</span>
+        <!-- End Main Button Section -->
+
+
+        <!-- Start Settings Section -->
 
         <div class="settings">
           <div>
@@ -133,6 +141,8 @@
 
       </form>
     </div>
+    <!-- End Control Panel Section -->
+
     <span id="span"></span>
     <div>
       <canvas id="myChart"></canvas>

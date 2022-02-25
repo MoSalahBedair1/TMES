@@ -833,6 +833,7 @@ body {
 
 #tracker:before {
   content: 'STOP?';
+  height: 100px;
   position: absolute;
   top: 25%;
   left: 30%;
@@ -843,9 +844,9 @@ body {
   transition: .5s;
 }
 
-#tracker:hover:before {
+#tracker.show-stop:before {
   opacity: 1;
-}
+} 
 
 .task-name {
   display: none;
@@ -1046,6 +1047,67 @@ body {
   top: 126%;
 }
 
+/* Pomodoro */
+
+.cancel-pomodoro-session {
+  display: none;
+  position: absolute;
+  /* top: 68%; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background-color: #df4759;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 30px;
+  color: white;
+  user-select: none;
+  transition: all 0.5s;
+  cursor: pointer
+}
+
+.cancel-pomodoro-session:hover::before {
+  opacity: 1;
+}
+
+.cancel-pomodoro-session:hover::after {
+  opacity: 1;
+}
+
+.cancel-pomodoro-session::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 15px;
+  border: 5px solid;
+  border-color: transparent transparent #000 transparent;
+  opacity: 0;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.cancel-pomodoro-session::after {
+  content: 'Stop Pomodoro?';
+  font-size: 12px;
+  line-height: 30px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  position: absolute;
+  top: 46px;
+  left: -34px;
+  width: 110px;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #000;
+  opacity: 0;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
 /* Settings */
 
 .settings {
@@ -1120,7 +1182,7 @@ body {
 }
 
 #pomodoro-switch:checked:before {
-  left: 23px;
+  left: 22px;
 }
 
 .settings-go-back {
