@@ -637,7 +637,8 @@ $('#tracker').click(function () {
 });
 /* End tracker button */
 
-/* Start Add time entry button */
+/* Start add time entry section */
+/* Start add time entry button */
 $('.add-time').click(function () {
   window.setTimeout(() => {
     $('.go-btn').css('pointer-events', 'none');
@@ -651,52 +652,6 @@ $('.add-time').click(function () {
   window.setTimeout(() => {$('.from-to, .add-go-back').fadeIn(500)}, 450);
 });
 /* End add time entry button */
-
-/* Go Back to Go Button (from add time entry) */
-$('.add-go-back').click(function () {
-  $('.go-btn').css('pointer-events', 'auto');
-  window.setTimeout(() => {$('.from-to, .add-go-back, .task-name').fadeOut(500)}, 100);
-  window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
-  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
-});
-/* End back to ge button (from add time entry) */
-
-/* Start Settings */
-/* Start Settings button */
-$('.settings-btn').click(function () {
-  window.setTimeout(() => {
-    $('.stp-btn-border').css('display', 'none');
-    $('.go-btn').css('pointer-events', 'none');
-    $('.add-time').css('left', '50%').fadeOut(200);
-    $('.settings-btn').css('left', '50%').fadeOut(200);
-    $('.color-picker-go').css('top', '45%').fadeOut(200);}, 10);
-  window.setTimeout(() => {
-    $('.go-ring').fadeOut(10);
-    $('.go-btn, .task-name').fadeOut(500);}, 300);
-  window.setTimeout(() => {$('.settings').fadeIn(500)}, 450);
-});
-/* End Settings button */
-
-/* Pomodoro Toggle Switch */
-$('#pomodoro-switch').change(function () {
-  if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
-    $('#pomodoro-period, #short-break, #long-break').prop('disabled', false);
-  } else {
-    $('#pomodoro-period, #short-break, #long-break').prop('disabled', true);
-  };
-});
-
-/* Go Back to Go Button (from settings) */
-$('.settings-go-back').click(function () {
-  $('.go-btn').css('pointer-events', 'auto');
-  window.setTimeout(() => {$('.settings').fadeOut(500)}, 100);
-  window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
-  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
-});
-/* End Settings */
-/* === Start Control Panel Section === */
-
-/* Start From-To Section */
 
 /* Start Validate The Inputs */
 var FromToSelectors = [".from-hours", ".from-minutes", ".from-seconds", ".to-hours", ".to-minutes", ".to-seconds"];
@@ -724,6 +679,7 @@ FromToSelectors.forEach(selector => {
 });
 /* End Validate The Inputs */
 
+/* Start add button */
 num = 1;
 
 $('.add').click(function () {
@@ -1049,6 +1005,53 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
   }
 
 });
+/* End add button */
+/* End add time entry section */
+
+/* Go Back to Go Button (from add time entry) */
+$('.add-go-back').click(function () {
+  $('.go-btn').css('pointer-events', 'auto');
+  window.setTimeout(() => {$('.from-to, .add-go-back, .task-name').fadeOut(500)}, 100);
+  window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
+  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
+});
+/* End back to ge button (from add time entry) */
+
+/* Start Settings */
+/* Start Settings button */
+$('.settings-btn').click(function () {
+  window.setTimeout(() => {
+    $('.stp-btn-border').css('display', 'none');
+    $('.go-btn').css('pointer-events', 'none');
+    $('.add-time').css('left', '50%').fadeOut(200);
+    $('.settings-btn').css('left', '50%').fadeOut(200);
+    $('.color-picker-go').css('top', '45%').fadeOut(200);}, 10);
+  window.setTimeout(() => {
+    $('.go-ring').fadeOut(10);
+    $('.go-btn, .task-name').fadeOut(500);}, 300);
+  window.setTimeout(() => {$('.settings').fadeIn(500)}, 450);
+});
+/* End Settings button */
+
+/* Pomodoro Toggle Switch */
+$('#pomodoro-switch').change(function () {
+  if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+    $('#pomodoro-period, #short-break, #long-break').prop('disabled', false);
+  } else {
+    $('#pomodoro-period, #short-break, #long-break').prop('disabled', true);
+  };
+});
+
+/* Go Back to Go Button (from settings) */
+$('.settings-go-back').click(function () {
+  $('.go-btn').css('pointer-events', 'auto');
+  window.setTimeout(() => {$('.settings').fadeOut(500)}, 100);
+  window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
+  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
+});
+/* End Settings */
+/* === Start Control Panel Section === */
+
 });
 
 /* Drafts */
