@@ -423,11 +423,7 @@ d.getFullYear();
 var
 span = document.getElementById('span'),
 trackerSpan = document.getElementById('tracker'),
-d,
-h,
-m,
-s,
-t,
+d,h,m,s,t,
 tHDegree,
 tMDegree,
 tSDegree,
