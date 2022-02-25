@@ -50,6 +50,9 @@ var
 span = document.getElementById('span'),
 trackerSpan = document.getElementById('tracker'),
 d,h,m,s,t,
+tSDegree,
+tMDegree,
+tHDegree,
 tDegree = 0;
 
 class TDegree { 
@@ -1048,7 +1051,7 @@ $('.settings-go-back').click(function () {
   window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
 });
 /* End Go Back to Go Button (from settings) */
-/* End Settings section */
+/* End Settings section   */
 /* === End Control Panel Section === */
 
 });
