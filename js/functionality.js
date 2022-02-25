@@ -1009,10 +1009,9 @@ if (StartPosition < 180 && EndPosition <= 180) { // Start In Circle3 And End In 
 
 /* Start Back to Go Button (from add time entry) */
 $('.add-go-back').click(function () {
-  $('.go-btn').css('pointer-events', 'auto');
   window.setTimeout(() => {$('.from-to, .add-go-back, .task-name').fadeOut(500)}, 100);
   window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
-  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
+  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600);$('.go-btn').css('pointer-events', 'auto');}, 700);
 });
 /* End back to go button (from add time entry) */
 /* End add time entry section */
@@ -1045,10 +1044,9 @@ $('#pomodoro-switch').change(function () {
 
 /* Start Go Back to Go Button (from settings) */
 $('.settings-go-back').click(function () {
-  $('.go-btn').css('pointer-events', 'auto');
   window.setTimeout(() => {$('.settings').fadeOut(500)}, 100);
   window.setTimeout(() => {$('.go-btn').fadeIn(500)}, 200);
-  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600)}, 700);
+  window.setTimeout(() => {$('.stp-btn-border, .go-ring, .add-time, .settings-btn, .color-picker-go').fadeIn(600);$('.go-btn').css('pointer-events', 'auto');}, 700);
 });
 /* End Go Back to Go Button (from settings) */
 /* End Settings section   */
