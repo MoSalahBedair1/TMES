@@ -558,6 +558,11 @@ $('.go-btn').click(function () {
   function track3break() {
     if ($('#tracker').is(':visible')) {
 
+      /* Start long break functionaliy */
+      if (pomodoroSessions == sessionsNumber) {
+      }
+      /* End long break functionaliy */
+
       trackedSeconds++;
 
       if (trackedSeconds == 60) {
