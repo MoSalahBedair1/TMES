@@ -225,6 +225,7 @@ $('.tracking-fill-color').change(function () {
 /* End changing the color of the main buttons with color palette */
 
 /* Start Go button */ // (Pomodoro functionality included)
+pomodoroSessions = 0;
 $('.go-btn').click(function () {
 
   $('.task-name').prop('disabled', true);
@@ -719,7 +720,6 @@ $('.go-btn').click(function () {
   trackedSeconds = 0;
   trackedMinutes = 0;
   trackedHours = 0;
-  pomodoroSessions = 0;
 
   function firstSecond() {
 
@@ -754,6 +754,7 @@ $('.go-btn').click(function () {
       pomodoroPeriod = $('#pomodoro-period').val();
       shortBreak = $('#short-break').val();
       longBreak = $('#long-break').val();
+      sessionsNumber = $('#sessions-number').val();
 
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == pomodoroPeriod) {
 
@@ -1269,9 +1270,9 @@ $('.settings-btn').click(function () {
 /* Start Pomodoro Toggle Switch */
 $('#pomodoro-switch').change(function () {
   if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
-    $('#pomodoro-period, #short-break, #long-break').prop('disabled', false);
+    $('#pomodoro-period, #short-break, #long-break, #sessions-number').prop('disabled', false);
   } else {
-    $('#pomodoro-period, #short-break, #long-break').prop('disabled', true);
+    $('#pomodoro-period, #short-break, #long-break, #sessions-number').prop('disabled', true);
   };
 });
 /* Start Pomodoro Toggle Switch */

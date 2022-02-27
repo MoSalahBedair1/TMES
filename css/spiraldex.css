@@ -1155,6 +1155,13 @@ body {
   font-weight: normal;
 }
 
+.settings label[for='sessions-number']:after {
+  content: 'Sessions';
+  position: absolute;
+  right: 27%;
+  font-weight: normal;
+}
+
 .settings input[type='text'] {
   margin-top: 10px;
   width: 68px;
@@ -1177,7 +1184,8 @@ body {
   outline: none;
   border-radius: 20px;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, .2);
-  transition: .5s;
+  transition: .2s;
+  transition-timing-function: linear;
 }
 
 #pomodoro-switch:checked {
@@ -1195,7 +1203,8 @@ body {
   transform: translateY(-50%);
   background-color: #fff;
   box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
-  transition: .5s;
+  transition: .2s;
+  transition-timing-function: linear;
 }
 
 #pomodoro-switch:checked:before {
