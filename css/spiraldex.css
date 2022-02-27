@@ -848,6 +848,23 @@ body {
   opacity: 1;
 } 
 
+#tracker:after {
+  content: 'Short Break!';
+  width: 110px;
+  position: absolute;
+  top: -25%;
+  left: 15%;
+  font-size: 18px;
+  font-weight: bold;
+  color: #3ec03e;
+  opacity: 0;
+  transition: .5s;
+}
+
+#tracker.short-break:after {
+  opacity: 1;
+} 
+
 .task-name {
   display: none;
   width: 250px;

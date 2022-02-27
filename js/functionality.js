@@ -41,7 +41,7 @@ new Circle('circle3', '15', true);
 new Circle('circle4', '20', false);
 new Circle('circle5', '25', true);
 new Circle('circle6', '30', false);
-/* Start creating circles halfs */
+/* End creating circles halfs */
 
 /* Start live clock section */
 var
@@ -51,7 +51,7 @@ d,h,m,s,t,
 tSDegree,
 tMDegree,
 tHDegree,
-tDegree = 490;
+tDegree = 0;
 
 class TDegree { 
 
@@ -342,7 +342,7 @@ $('.go-btn').click(function () {
     style='
     width: 133px;
     height: 266px;
-    background-color: ${color};
+    background-color: ${color}80;
     position: absolute;
     left: 100%;
     bottom: -3px;
@@ -404,7 +404,7 @@ $('.go-btn').click(function () {
       style='
       width: 166.25px;
       height: 332.5px;
-      background-color: ${color};
+      background-color: ${color}80;
       position: absolute;
       right: 100%;
       bottom: -3px;
@@ -464,7 +464,7 @@ $('.go-btn').click(function () {
       style='
       width: 199.5px;
       height: 399px;
-      background-color: ${color};
+      background-color: ${color}80;
       position: absolute;
       left: 100%;
       bottom: -3px;
@@ -555,44 +555,162 @@ $('.go-btn').click(function () {
   }
 
   function track3break() {
+    console.log('breakTracker3');
     if ($('#tracker').is(':visible')) {
-      if (tDegree <= 180) { // Starts At Circle 3
-        circle3Add.circle3BreakTracking();
-      } else if (tDegree > 180 && tDegree <= 360) { // From circl3 to Circle 4
-        circle4Add.circle4BreakStartTrack();
+
+      trackedSeconds++;
+
+      if (trackedSeconds == 60) {
+        trackedSeconds = 0;
+        trackedMinutes++;
+        if (trackedMinutes == 60) {
+          trackedMinutes = 0;
+          trackedHours++
+        }
+      }
+
+      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+      trackerSpan.textContent = trackedTimeString;
+
+      if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
+        num++
         clearInterval(breakTracker3);
-        track4break();
-        breakTracker4 = setInterval(track4break, 10);
+        $('#tracker').css('display', 'none');
+        $('.task-name').prop('disabled', false);
+        $('.go-btn').css('display', 'inline');
+        $('.stp-btn-border').css('background-color', '#3ec03e');
+        $('.go-ring').css('border', '3px solid #3ec03e');
+        window.setTimeout(() => {
+          $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+          $('#tracker').removeClass('short-break');
+        }, 50);
+      } else {
+          window.setTimeout(() => {$('#tracker').addClass('short-break');}, 50);
+          circle3Add.circle3BreakTracking();
+          if (tDegree > 180 && tDegree <= 360) { // From circl3 to Circle 4
+              circle4Add.circle4BreakStartTrack();
+              clearInterval(breakTracker3);
+              track4break();
+              breakTracker4 = setInterval(track4break, 10);
+        }
       }
     }
   }
   function track4break() {
     if ($('#tracker').is(':visible')) {
-      circle4Add.circle4BreakTracking();
-      if (tDegree > 360 && tDegree <= 540) { // From circle 4 to circle 5
-        circle5Add.circle5BreakStartTrack();
+      trackedSeconds++;
+
+      if (trackedSeconds == 60) {
+        trackedSeconds = 0;
+        trackedMinutes++;
+        if (trackedMinutes == 60) {
+          trackedMinutes = 0;
+          trackedHours++
+        }
+      }
+  
+      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+  
+      trackerSpan.textContent = trackedTimeString;
+      if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
+        num++
         clearInterval(breakTracker4);
-        track5break();
-        breakTracker5 = setInterval(track5break, 10);
+        $('#tracker').css('display', 'none');
+        $('.task-name').prop('disabled', false);
+        $('.go-btn').css('display', 'inline');
+        $('.stp-btn-border').css('background-color', '#3ec03e');
+        $('.go-ring').css('border', '3px solid #3ec03e');
+        window.setTimeout(() => {
+          $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+          $('#tracker').removeClass('short-break');
+        }, 50);
+      } else {
+        window.setTimeout(() => {$('#tracker').addClass('short-break');}, 50);
+        circle4Add.circle4BreakTracking();
+        if (tDegree > 360 && tDegree <= 540) { // From circle 4 to circle 5
+          circle5Add.circle5BreakStartTrack();
+          clearInterval(breakTracker4);
+          track5break();
+          breakTracker5 = setInterval(track5break, 10);
+        }
       }
     }
   }
   function track5break() {
     if ($('#tracker').is(':visible')) {
-      circle5Add.circle5BreakTracking();
-      if (tDegree > 540 && tDegree <= 720) { // From circle 5 to circle 6
-        circle6Add.circle6BreakStartTrack();
+      trackedSeconds++;
+
+      if (trackedSeconds == 60) {
+        trackedSeconds = 0;
+        trackedMinutes++;
+        if (trackedMinutes == 60) {
+          trackedMinutes = 0;
+          trackedHours++
+        }
+      }
+  
+      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+  
+      trackerSpan.textContent = trackedTimeString;
+      if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
+        num++
         clearInterval(breakTracker5);
-        track6break();
-        breakTracker6 = setInterval(track6break, 10);
+        $('#tracker').css('display', 'none');
+        $('.task-name').prop('disabled', false);
+        $('.go-btn').css('display', 'inline');
+        $('.stp-btn-border').css('background-color', '#3ec03e');
+        $('.go-ring').css('border', '3px solid #3ec03e');
+        window.setTimeout(() => {
+          $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+          $('#tracker').removeClass('short-break');
+        }, 50);
+      } else {
+        window.setTimeout(() => {$('#tracker').addClass('short-break');}, 50);
+        circle5Add.circle5BreakTracking();
+        if (tDegree > 540 && tDegree <= 720) { // From circle 5 to circle 6
+          circle6Add.circle6BreakStartTrack();
+          clearInterval(breakTracker5);
+          track6break();
+          breakTracker6 = setInterval(track6break, 10);
+        }
       }
     } 
   }
   function track6break() {
     if ($('#tracker').is(':visible')) {
-      circle6Add.circle6BreakTracking();
-      if (tDegree == 720) {
-        clearInterval(track6break);
+      trackedSeconds++;
+
+      if (trackedSeconds == 60) {
+        trackedSeconds = 0;
+        trackedMinutes++;
+        if (trackedMinutes == 60) {
+          trackedMinutes = 0;
+          trackedHours++
+        }
+      }
+  
+      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+  
+      trackerSpan.textContent = trackedTimeString;
+      if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
+        num++
+        clearInterval(breakTracker6);
+        $('#tracker').css('display', 'none');
+        $('.task-name').prop('disabled', false);
+        $('.go-btn').css('display', 'inline');
+        $('.stp-btn-border').css('background-color', '#3ec03e');
+        $('.go-ring').css('border', '3px solid #3ec03e');
+        window.setTimeout(() => {
+          $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+          $('#tracker').removeClass('short-break');
+        }, 50);
+      } else {
+        window.setTimeout(() => {$('#tracker').addClass('short-break');}, 50);
+        circle6Add.circle6BreakTracking();
+        if (tDegree == 720) {
+          clearInterval(track6break);
+        }
       }
     }
   }
@@ -638,6 +756,8 @@ $('.go-btn').click(function () {
 
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == pomodoroPeriod) {
 
+        firstSecond();
+
         pomodoroSessions++;
         clearInterval(trackedTimeInterval);
         if (tDegree <= 180) {
@@ -661,46 +781,6 @@ $('.go-btn').click(function () {
           track6break();
           breakTracker6 = setInterval(track6break, 10);
         }
-
-        trackerSpan.textContent = 'Short Break?';
-        $('#tracker').css({
-          'font-size': '22px',
-          'font-weight': 'bold'
-        });
-
-        // if (trackerSpan.textContent == 'Short Break?') {
-
-        //   trackerSpan.click(function () {
-
-        //     function shortBreakMethod() {
-
-        //     trackedSeconds++;
-
-        //     if (trackedSeconds == 60) {
-        //       trackedSeconds = 0;
-        //       trackedMinutes++;
-        //       if (trackedMinutes == 60) {
-        //         trackedMinutes = 0;
-        //         trackedHours++
-        //       }
-        //     }
-
-        //     trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
-
-        //     trackerSpan.textContent = trackedTimeString;
-
-        //     if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
-        //       clearInterval(shortBreakMethodInterval);
-        //       trackerSpan.textContent = 'GO';
-        //     }
-
-        //     }
-
-        //     firstSecond();
-        //     shortBreakMethodInterval = setInterval(shortBreakMethod, 10);
-
-        //   });
-        // }
       }
     }
   }
@@ -752,21 +832,38 @@ $('#tracker').hover(function () {
 
 $('#tracker').click(function () {
   num++
+  clearInterval(trackedTimeInterval);
+  if (tDegree <= 180) {
+    clearInterval(tracker3);
+    if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+      clearInterval(breakTracker3);
+    }
+  } else if (tDegree > 180 && tDegree <= 360) {
+    clearInterval(tracker4);
+    if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+      clearInterval(breakTracker4);
+    }
+  } else if (tDegree > 360 && tDegree <= 540) {
+    clearInterval(tracker5);
+    if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+      clearInterval(breakTracker5);
+    }
+  } else if (tDegree > 540 && tDegree <= 720) {
+    clearInterval(tracker6);
+    if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+      clearInterval(breakTracker6);
+    }
+  }
+
+  window.setTimeout(() => {$('#tracker').removeClass('short-break');}, 50);
+
   $(this).css('display', 'none');
   $('.task-name').prop('disabled', false);
   $('.go-btn').css('display', 'inline');
   $('.stp-btn-border').css('background-color', '#3ec03e');
   $('.go-ring').css('border', '3px solid #3ec03e');
-
   if ($('.cancel-pomodoro-session').is(':visible')) {
     window.setTimeout(() => {$('.cancel-pomodoro-session').css('top', '50%').fadeOut(500)}, 50);
-
-    // if (trackerSpan.textContent == 'GO') {
-
-    //   firstSecond();
-    //   trackedTimeInterval = setInterval(trackedTime, 10);
-
-    // }
   }
 
 });
@@ -1188,6 +1285,11 @@ $('.settings-go-back').click(function () {
 /* === End Control Panel Section === */
 
 });
+
+/* Important Notes */
+/*
+  [1] add a front-end required feature to the input fields of the pomodoro functionality
+*/
 
 /* Drafts */
 /*
