@@ -863,7 +863,12 @@ body {
 
 #tracker.short-break:after {
   opacity: 1;
-} 
+}
+
+#tracker.long-break:after {
+  content: 'Long Break!';
+  opacity: 1;
+}
 
 .task-name {
   display: none;

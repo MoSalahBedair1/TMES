@@ -555,70 +555,70 @@ $('.go-btn').click(function () {
     }
   }
 
-  function track3break() {
-    if ($('#tracker').is(':visible')) {
+  trackedSeconds = 0;
+  trackedMinutes = 0;
+  trackedHours = 0;
 
-      /* Start long break functionaliy */
-      if (pomodoroSessions == sessionsNumber) {
-      }
-      /* End long break functionaliy */
+  function tracking() {
 
-      trackedSeconds++;
+    trackedSeconds++;
 
-      if (trackedSeconds == 60) {
-        trackedSeconds = 0;
-        trackedMinutes++;
-        if (trackedMinutes == 60) {
-          trackedMinutes = 0;
-          trackedHours++
-        }
-      }
-
-      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
-
-      trackerSpan.textContent = trackedTimeString;
-
-      if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
-        num++
-        clearInterval(breakTracker3);
-        $('#tracker').css('display', 'none');
-        $('.task-name').prop('disabled', false);
-        $('.go-btn').css('display', 'inline');
-        $('.stp-btn-border').css('background-color', '#3ec03e');
-        $('.go-ring').css('border', '3px solid #3ec03e');
-        window.setTimeout(() => {
-          $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
-          $('#tracker').removeClass('short-break');
-        }, 50);
-      } else {
-          window.setTimeout(() => {$('#tracker').addClass('short-break');}, 50);
-          circle3Add.circle3BreakTracking();
-          if (tDegree > 180 && tDegree <= 360) { // From circl3 to Circle 4
-              circle4Add.circle4BreakStartTrack();
-              clearInterval(breakTracker3);
-              track4break();
-              breakTracker4 = setInterval(track4break, 10);
-        }
+    if (trackedSeconds == 60) {
+      trackedSeconds = 0;
+      trackedMinutes++;
+      if (trackedMinutes == 60) {
+        trackedMinutes = 0;
+        trackedHours++
       }
     }
+
+    trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+
+    trackerSpan.textContent = trackedTimeString;
+
+  }
+
+  function track3break() {
+    breakTrackingObject3.breakTracking(breakTracker3, circle3Add.circle3BreakTracking(), 180, 360, circle4Add.circle4BreakStartTrack(), track4break(), track4break, breakTracker4);
   }
   function track4break() {
     if ($('#tracker').is(':visible')) {
 
-      trackedSeconds++;
+      /* Start long break functionaliy */
+      if (pomodoroSessions == sessionsNumber) {
 
-      if (trackedSeconds == 60) {
-        trackedSeconds = 0;
-        trackedMinutes++;
-        if (trackedMinutes == 60) {
-          trackedMinutes = 0;
-          trackedHours++
+        tracking();
+
+        if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
+          num++
+          clearInterval(breakTracker4);
+          $('#tracker').css('display', 'none');
+          $('.task-name').prop('disabled', false);
+          $('.go-btn').css('display', 'inline');
+          $('.stp-btn-border').css('background-color', '#3ec03e');
+          $('.go-ring').css('border', '3px solid #3ec03e');
+          window.setTimeout(() => {
+            $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+            $('#tracker').removeClass('long-break');
+          }, 50);
+        } else {
+          window.setTimeout(() => {$('#tracker').addClass('long-break');}, 50);
+          circle4Add.circle4BreakTracking();
+          if (tDegree > 360 && tDegree <= 540) { // From circle 4 to circle 5
+            circle5Add.circle5BreakStartTrack();
+            clearInterval(breakTracker4);
+            track5break();
+            breakTracker5 = setInterval(track5break, 10);
+          }
         }
+
       }
+      /* End long break functionaliy */
 
-      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
+      /* Start short break functionality */
+        else {
 
-      trackerSpan.textContent = trackedTimeString;
+          tracking();
 
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
         num++
@@ -643,23 +643,47 @@ $('.go-btn').click(function () {
         }
       }
     }
+    }
   }
   function track5break() {
     if ($('#tracker').is(':visible')) {
-      trackedSeconds++;
 
-      if (trackedSeconds == 60) {
-        trackedSeconds = 0;
-        trackedMinutes++;
-        if (trackedMinutes == 60) {
-          trackedMinutes = 0;
-          trackedHours++
+      /* Start long break functionaliy */
+      if (pomodoroSessions == sessionsNumber) {
+
+        tracking();
+
+        if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
+          num++
+          clearInterval(breakTracker5);
+          $('#tracker').css('display', 'none');
+          $('.task-name').prop('disabled', false);
+          $('.go-btn').css('display', 'inline');
+          $('.stp-btn-border').css('background-color', '#3ec03e');
+          $('.go-ring').css('border', '3px solid #3ec03e');
+          window.setTimeout(() => {
+            $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+            $('#tracker').removeClass('long-break');
+          }, 50);
+        } else {
+          window.setTimeout(() => {$('#tracker').addClass('long-break');}, 50);
+          circle5Add.circle5BreakTracking();
+          if (tDegree > 540 && tDegree <= 720) { // From circle 5 to circle 6
+            circle6Add.circle6BreakStartTrack();
+            clearInterval(breakTracker5);
+            track6break();
+            breakTracker6 = setInterval(track6break, 10);
+          }
         }
+
       }
-  
-      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
-  
-      trackerSpan.textContent = trackedTimeString;
+      /* End long break functionaliy */
+
+      /* Start short break functionality */
+        else {
+
+          tracking();
+
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
         num++
         clearInterval(breakTracker5);
@@ -682,24 +706,44 @@ $('.go-btn').click(function () {
           breakTracker6 = setInterval(track6break, 10);
         }
       }
+    }
     } 
   }
   function track6break() {
     if ($('#tracker').is(':visible')) {
-      trackedSeconds++;
+      /* Start long break functionaliy */
+      if (pomodoroSessions == sessionsNumber) {
 
-      if (trackedSeconds == 60) {
-        trackedSeconds = 0;
-        trackedMinutes++;
-        if (trackedMinutes == 60) {
-          trackedMinutes = 0;
-          trackedHours++
+        tracking();
+
+        if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
+          num++
+          clearInterval(breakTracker6);
+          $('#tracker').css('display', 'none');
+          $('.task-name').prop('disabled', false);
+          $('.go-btn').css('display', 'inline');
+          $('.stp-btn-border').css('background-color', '#3ec03e');
+          $('.go-ring').css('border', '3px solid #3ec03e');
+          window.setTimeout(() => {
+            $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+            $('#tracker').removeClass('long-break');
+          }, 50);
+        } else {
+          window.setTimeout(() => {$('#tracker').addClass('long-break');}, 50);
+          circle6Add.circle6BreakTracking();
+          if (tDegree == 720) {
+            clearInterval(track6break);
+          }
         }
+
       }
-  
-      trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
-  
-      trackerSpan.textContent = trackedTimeString;
+      /* End long break functionaliy */
+
+      /* Start short break functionality */
+        else {
+
+        tracking();
+
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
         num++
         clearInterval(breakTracker6);
@@ -720,11 +764,8 @@ $('.go-btn').click(function () {
         }
       }
     }
+    }
   }
-
-  trackedSeconds = 0;
-  trackedMinutes = 0;
-  trackedHours = 0;
 
   function firstSecond() {
 
@@ -921,7 +962,6 @@ FromToSelectors.forEach(selector => {
 
 /* Start add button */
 num = 1;
-
 $('.add').click(function () {
 
 var
@@ -1316,4 +1356,77 @@ date =
 (day<10 ? '0' : '') + day + '/' + 
 (month<10 ? '0' : '') + month + '/' + 
 d.getFullYear();
+
+* idea of a oop for break trackers *
+
+var pomodoroPeriod, shortBreak, longBreak, breakTracker3, breakTracker4, breakTracker5, breakTracker6;
+
+  class BreakTracking {
+    breakTracking(breakTracker, circleBreakTracking, startDegree, endDegree, circleStartBreak, nextCirclekFunction, nextCirclekFunctionForInterval, interval) {
+      if ($('#tracker').is(':visible')) {
+
+        * Start long break functionaliy *
+        if (pomodoroSessions == sessionsNumber) {
+  
+          tracking();
+  
+          if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
+            num++
+            clearInterval(breakTracker);
+            $('#tracker').css('display', 'none');
+            $('.task-name').prop('disabled', false);
+            $('.go-btn').css('display', 'inline');
+            $('.stp-btn-border').css('background-color', '#3ec03e');
+            $('.go-ring').css('border', '3px solid #3ec03e');
+            window.setTimeout(() => {
+              $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+              $('#tracker').removeClass('long-break');
+            }, 50);
+          } else {
+            window.setTimeout(() => {$('#tracker').addClass('long-break');}, 50);
+            circleBreakTracking;
+            if (tDegree > startDegree && tDegree <= endDegree) { // From circl3 to Circle 4
+                circleStartBreak;
+                clearInterval(breakTracker);
+                nextCirclekFunction;
+                interval = setInterval(nextCirclekFunctionForInterval, 10);
+          }
+          }
+  
+        }
+        * End long break functionaliy *
+  
+        * Start short break functionality *
+          else {
+  
+            tracking();
+  
+            if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
+              num++
+              clearInterval(breakTracker);
+              $('#tracker').css('display', 'none');
+              $('.task-name').prop('disabled', false);
+              $('.go-btn').css('display', 'inline');
+              $('.stp-btn-border').css('background-color', '#3ec03e');
+              $('.go-ring').css('border', '3px solid #3ec03e');
+              window.setTimeout(() => {
+                $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+                $('#tracker').removeClass('short-break');
+              }, 50);
+            } else {
+                window.setTimeout(() => {$('#tracker').addClass('short-break');}, 50);
+                circleBreakTracking;
+                if (tDegree > startDegree && tDegree <= endDegree) { // From circl3 to Circle 4
+                    circleStartBreak;
+                    clearInterval(breakTracker);
+                    nextCirclekFunction;
+                    interval = setInterval(nextCirclekFunctionForInterval, 10);
+              }
+            }
+        }
+        * End short break functionality *
+      }
+    }
+  }
+
 */
