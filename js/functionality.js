@@ -224,7 +224,7 @@ $('.tracking-fill-color').change(function () {
 });
 /* End changing the color of the main buttons with color palette */
 
-/* Start Go button */
+/* Start Go button */ // (Pomodoro functionality included)
 $('.go-btn').click(function () {
 
   $('.task-name').prop('disabled', true);
@@ -555,7 +555,6 @@ $('.go-btn').click(function () {
   }
 
   function track3break() {
-    console.log('breakTracker3');
     if ($('#tracker').is(':visible')) {
 
       trackedSeconds++;
@@ -599,6 +598,7 @@ $('.go-btn').click(function () {
   }
   function track4break() {
     if ($('#tracker').is(':visible')) {
+
       trackedSeconds++;
 
       if (trackedSeconds == 60) {
@@ -609,10 +609,11 @@ $('.go-btn').click(function () {
           trackedHours++
         }
       }
-  
+
       trackedTimeString = `${trackedHours < 10 ? '0' : ''}${trackedHours}:${trackedMinutes < 10 ? '0' : ''}${trackedMinutes}:${trackedSeconds < 10 ? '0' : ''}${trackedSeconds}`;
-  
+
       trackerSpan.textContent = trackedTimeString;
+
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
         num++
         clearInterval(breakTracker4);
@@ -730,7 +731,7 @@ $('.go-btn').click(function () {
 
     trackerSpan.textContent = trackedTimeString;
   }
-
+  /* Pomodoro functionality included */
   function trackedTime() {
 
     trackedSeconds++;
@@ -783,6 +784,7 @@ $('.go-btn').click(function () {
         }
       }
     }
+    /* End Pomodoro functionality */
   }
 
   firstSecond();
