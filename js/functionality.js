@@ -578,8 +578,75 @@ $('.go-btn').click(function () {
 
   }
 
+  function reset() {
+    $('#tracker').css('display', 'none');
+    $('.task-name').prop('disabled', false);
+    $('.go-btn').css('display', 'inline');
+    $('.stp-btn-border').css('background-color', '#3ec03e');
+    $('.go-ring').css('border', '3px solid #3ec03e');
+  }
+
   function track3break() {
-    breakTrackingObject3.breakTracking(breakTracker3, circle3Add.circle3BreakTracking(), 180, 360, circle4Add.circle4BreakStartTrack(), track4break(), track4break, breakTracker4);
+    if ($('#tracker').is(':visible')) {
+
+      /* Start long break functionaliy */
+      if (pomodoroSessions == sessionsNumber) {
+
+        tracking();
+
+        if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
+          num++
+          pomodoroSessions = 0;
+          clearInterval(breakTracker3);
+
+          reset();
+
+          window.setTimeout(() => {
+            $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+            $('#tracker').removeClass('long-break');
+          }, 50);
+        } else {
+          window.setTimeout(() => {$('#tracker').addClass('long-break');}, 50);
+          circle3Add.circle3BreakTracking();
+          if (tDegree > 360 && tDegree <= 540) { // From circle 4 to circle 5
+            circle4Add.circle4BreakStartTrack();
+            clearInterval(breakTracker4);
+            track4break();
+            breakTracker4 = setInterval(track4break, 10);
+          }
+        }
+
+      }
+      /* End long break functionaliy */
+
+      /* Start short break functionality */
+        else {
+
+          tracking();
+
+          if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
+            num++
+            clearInterval(breakTracker3);
+
+            reset();
+
+            window.setTimeout(() => {
+              $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+              $('#tracker').removeClass('short-break');
+            }, 50);
+          } else {
+              window.setTimeout(() => {$('#tracker').addClass('short-break');}, 50);
+              circle3Add.circle3BreakTracking();
+              if (tDegree > 180 && tDegree <= 360) { // From circl3 to Circle 4
+                  circle4Add.circle4BreakStartTrack();
+                  clearInterval(breakTracker3);
+                  track4break();
+                  breakTracker4 = setInterval(track4break, 10);
+            }
+          }
+        }
+    }
+    
   }
   function track4break() {
     if ($('#tracker').is(':visible')) {
@@ -592,11 +659,9 @@ $('.go-btn').click(function () {
         if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
           num++
           clearInterval(breakTracker4);
-          $('#tracker').css('display', 'none');
-          $('.task-name').prop('disabled', false);
-          $('.go-btn').css('display', 'inline');
-          $('.stp-btn-border').css('background-color', '#3ec03e');
-          $('.go-ring').css('border', '3px solid #3ec03e');
+
+          reset();
+
           window.setTimeout(() => {
             $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
             $('#tracker').removeClass('long-break');
@@ -623,11 +688,9 @@ $('.go-btn').click(function () {
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
         num++
         clearInterval(breakTracker4);
-        $('#tracker').css('display', 'none');
-        $('.task-name').prop('disabled', false);
-        $('.go-btn').css('display', 'inline');
-        $('.stp-btn-border').css('background-color', '#3ec03e');
-        $('.go-ring').css('border', '3px solid #3ec03e');
+
+        reset();
+
         window.setTimeout(() => {
           $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
           $('#tracker').removeClass('short-break');
@@ -656,11 +719,9 @@ $('.go-btn').click(function () {
         if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
           num++
           clearInterval(breakTracker5);
-          $('#tracker').css('display', 'none');
-          $('.task-name').prop('disabled', false);
-          $('.go-btn').css('display', 'inline');
-          $('.stp-btn-border').css('background-color', '#3ec03e');
-          $('.go-ring').css('border', '3px solid #3ec03e');
+
+          reset();
+
           window.setTimeout(() => {
             $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
             $('#tracker').removeClass('long-break');
@@ -687,11 +748,9 @@ $('.go-btn').click(function () {
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
         num++
         clearInterval(breakTracker5);
-        $('#tracker').css('display', 'none');
-        $('.task-name').prop('disabled', false);
-        $('.go-btn').css('display', 'inline');
-        $('.stp-btn-border').css('background-color', '#3ec03e');
-        $('.go-ring').css('border', '3px solid #3ec03e');
+
+        reset();
+
         window.setTimeout(() => {
           $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
           $('#tracker').removeClass('short-break');
@@ -719,11 +778,9 @@ $('.go-btn').click(function () {
         if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
           num++
           clearInterval(breakTracker6);
-          $('#tracker').css('display', 'none');
-          $('.task-name').prop('disabled', false);
-          $('.go-btn').css('display', 'inline');
-          $('.stp-btn-border').css('background-color', '#3ec03e');
-          $('.go-ring').css('border', '3px solid #3ec03e');
+
+          reset();
+
           window.setTimeout(() => {
             $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
             $('#tracker').removeClass('long-break');
@@ -747,11 +804,9 @@ $('.go-btn').click(function () {
       if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
         num++
         clearInterval(breakTracker6);
-        $('#tracker').css('display', 'none');
-        $('.task-name').prop('disabled', false);
-        $('.go-btn').css('display', 'inline');
-        $('.stp-btn-border').css('background-color', '#3ec03e');
-        $('.go-ring').css('border', '3px solid #3ec03e');
+
+        reset();
+
         window.setTimeout(() => {
           $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
           $('#tracker').removeClass('short-break');
@@ -904,7 +959,10 @@ $('#tracker').click(function () {
     }
   }
 
-  window.setTimeout(() => {$('#tracker').removeClass('short-break');}, 50);
+  window.setTimeout(() => {
+    $('#tracker').removeClass('short-break');
+    $('#tracker').removeClass('long-break');
+  }, 50);
 
   $(this).css('display', 'none');
   $('.task-name').prop('disabled', false);
