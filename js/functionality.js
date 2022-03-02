@@ -47,11 +47,17 @@ new Circle('circle6', '30', false);
 var
 span = document.getElementById('span'),
 trackerSpan = document.getElementById('tracker'),
+currenctSession = document.getElementById('current-session'),
+sessionsRemaining = document.getElementById('sessions-remaining'),
 d,h,m,s,t,
 tSDegree,
 tMDegree,
 tHDegree,
-tDegree = 0;
+tDegree = 0,
+breakTracker3,
+breakTracker4,
+breakTracker5,
+breakTracker6;
 
 class TDegree { 
 
@@ -225,7 +231,7 @@ $('.tracking-fill-color').change(function () {
 /* End changing the color of the main buttons with color palette */
 
 /* Start Go button */ // (Pomodoro functionality included)
-pomodoroSessions = 0;
+pomodoroSessions = 1;
 $('.go-btn').click(function () {
 
   $('.task-name').prop('disabled', true);
@@ -236,6 +242,15 @@ $('.go-btn').click(function () {
     'background-color': '#f44336',
     'transform': 'translate(-50%, -50%) scale(0.9)'
   });
+
+  if($( '#pomodoro-switch').prop( "checked" ) == true) {
+  $('.cancel-pomodoro-session').css('display', 'inline');
+  $('.sessions-tracker').css('display', 'block');
+  window.setTimeout(() => {
+    $('.cancel-pomodoro-session').css('top', '68%');
+    $('.sessions-tracker').css('left', '21%');
+  }, 50);
+}
 
   color = $('.tracking-fill-color').val();
 
@@ -590,19 +605,20 @@ $('.go-btn').click(function () {
     if ($('#tracker').is(':visible')) {
 
       /* Start long break functionaliy */
-      if (pomodoroSessions == sessionsNumber) {
+      if (pomodoroSessions - 1  == sessionsNumber) {
 
         tracking();
 
         if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == longBreak) {
           num++
-          pomodoroSessions = 0;
+          pomodoroSessions = 1;
           clearInterval(breakTracker3);
 
           reset();
 
           window.setTimeout(() => {
             $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+            $('.sessions-tracker').css('left', '43%').fadeOut(500);
             $('#tracker').removeClass('long-break');
           }, 50);
         } else {
@@ -632,6 +648,7 @@ $('.go-btn').click(function () {
 
             window.setTimeout(() => {
               $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+              $('.sessions-tracker').css('left', '43%').fadeOut(500);
               $('#tracker').removeClass('short-break');
             }, 50);
           } else {
@@ -652,7 +669,7 @@ $('.go-btn').click(function () {
     if ($('#tracker').is(':visible')) {
 
       /* Start long break functionaliy */
-      if (pomodoroSessions == sessionsNumber) {
+      if (pomodoroSessions - 1  == sessionsNumber) {
 
         tracking();
 
@@ -664,6 +681,7 @@ $('.go-btn').click(function () {
 
           window.setTimeout(() => {
             $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+            $('.sessions-tracker').css('left', '43%').fadeOut(500);
             $('#tracker').removeClass('long-break');
           }, 50);
         } else {
@@ -693,6 +711,7 @@ $('.go-btn').click(function () {
 
         window.setTimeout(() => {
           $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+          $('.sessions-tracker').css('left', '43%').fadeOut(500);
           $('#tracker').removeClass('short-break');
         }, 50);
       } else {
@@ -712,7 +731,7 @@ $('.go-btn').click(function () {
     if ($('#tracker').is(':visible')) {
 
       /* Start long break functionaliy */
-      if (pomodoroSessions == sessionsNumber) {
+      if (pomodoroSessions - 1  == sessionsNumber) {
 
         tracking();
 
@@ -724,6 +743,7 @@ $('.go-btn').click(function () {
 
           window.setTimeout(() => {
             $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+            $('.sessions-tracker').css('left', '43%').fadeOut(500);
             $('#tracker').removeClass('long-break');
           }, 50);
         } else {
@@ -753,6 +773,7 @@ $('.go-btn').click(function () {
 
         window.setTimeout(() => {
           $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+          $('.sessions-tracker').css('left', '43%').fadeOut(500);
           $('#tracker').removeClass('short-break');
         }, 50);
       } else {
@@ -771,7 +792,7 @@ $('.go-btn').click(function () {
   function track6break() {
     if ($('#tracker').is(':visible')) {
       /* Start long break functionaliy */
-      if (pomodoroSessions == sessionsNumber) {
+      if (pomodoroSessions - 1  == sessionsNumber) {
 
         tracking();
 
@@ -783,6 +804,7 @@ $('.go-btn').click(function () {
 
           window.setTimeout(() => {
             $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+            $('.sessions-tracker').css('left', '43%').fadeOut(500);
             $('#tracker').removeClass('long-break');
           }, 50);
         } else {
@@ -809,6 +831,7 @@ $('.go-btn').click(function () {
 
         window.setTimeout(() => {
           $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+          $('.sessions-tracker').css('left', '43%').fadeOut(500);
           $('#tracker').removeClass('short-break');
         }, 50);
       } else {
@@ -862,6 +885,7 @@ $('.go-btn').click(function () {
         firstSecond();
 
         pomodoroSessions++;
+        console.log('current pomodoro session before the short break is' + pomodoroSessions);
         clearInterval(trackedTimeInterval);
         if (tDegree <= 180) {
           clearInterval(tracker3);
@@ -892,6 +916,13 @@ $('.go-btn').click(function () {
   firstSecond();
   trackedTimeInterval = setInterval(trackedTime, 10);
 
+window.setTimeout(() => {
+  if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
+  currenctSession.textContent = `#${pomodoroSessions} / `;
+  sessionsRemaining.textContent = sessionsNumber;
+  }
+}, 15)
+
 });
 
 $('.go-btn').hover(function () {
@@ -920,13 +951,6 @@ $('#tracker').hover(function () {
     $('#tracker').addClass('show-stop');
   }, 50);
 
-  if($( '#pomodoro-switch').prop( "checked" ) == true) {
-    $('.cancel-pomodoro-session').css('display', 'inline');
-    window.setTimeout(() => {
-      $('.cancel-pomodoro-session').css('top', '68%');
-    }, 50);
-  }
-
 }, function () {
   window.setTimeout(() => {
     $('.stp-btn-border').css({'transform':'translate(-50%, -50%) scale(0.9)'});
@@ -941,21 +965,25 @@ $('#tracker').click(function () {
     clearInterval(tracker3);
     if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
       clearInterval(breakTracker3);
+      pomodoroSessions = 1;
     }
   } else if (tDegree > 180 && tDegree <= 360) {
     clearInterval(tracker4);
     if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
       clearInterval(breakTracker4);
+      pomodoroSessions = 1;
     }
   } else if (tDegree > 360 && tDegree <= 540) {
     clearInterval(tracker5);
     if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
       clearInterval(breakTracker5);
+      pomodoroSessions = 1;
     }
   } else if (tDegree > 540 && tDegree <= 720) {
     clearInterval(tracker6);
     if($( '#pomodoro-switch' ).prop( "checked" ) == true) {
       clearInterval(breakTracker6);
+      pomodoroSessions = 1;
     }
   }
 
@@ -970,11 +998,31 @@ $('#tracker').click(function () {
   $('.stp-btn-border').css('background-color', '#3ec03e');
   $('.go-ring').css('border', '3px solid #3ec03e');
   if ($('.cancel-pomodoro-session').is(':visible')) {
-    window.setTimeout(() => {$('.cancel-pomodoro-session').css('top', '50%').fadeOut(500)}, 50);
+    window.setTimeout(() => {
+      $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+      $('.sessions-tracker').css('left', '43%').fadeOut(500);
+    }, 50);
   }
 
 });
 /* End tracker button */
+
+/* Start cancel pomodoro button */
+$('.cancel-pomodoro-session').click(function () {
+  // stop the tracking
+  $( '#pomodoro-switch' ).prop("checked", false);
+  $('#pomodoro-period, #short-break, #long-break, #sessions-number').prop('disabled', true);
+  $('#tracker').css('display', 'none');
+  $('.task-name').prop('disabled', false);
+  $('.go-btn').css('display', 'inline');
+  $('.stp-btn-border').css('background-color', '#3ec03e');
+  $('.go-ring').css('border', '3px solid #3ec03e');
+    window.setTimeout(() => {
+      $('.cancel-pomodoro-session').css('top', '50%').fadeOut(500);
+      $('.sessions-tracker').css('left', '43%').fadeOut(500);
+    }, 50);
+});
+/* End cancel pomodoro button */
 
 /* Start add time entry section */
 /* Start add time entry button */
@@ -1424,7 +1472,7 @@ var pomodoroPeriod, shortBreak, longBreak, breakTracker3, breakTracker4, breakTr
       if ($('#tracker').is(':visible')) {
 
         * Start long break functionaliy *
-        if (pomodoroSessions == sessionsNumber) {
+        if (pomodoroSessions - 1  == sessionsNumber) {
   
           tracking();
   

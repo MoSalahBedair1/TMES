@@ -1130,6 +1130,25 @@ body {
   pointer-events: none;
 }
 
+.sessions-tracker {
+  display: none;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 43%;
+  transform: translateY(-50%);
+  width: 90px;
+  height: 30px;
+  background-color: #df4759;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 15px;
+  user-select: none;
+  transition: all 0.5s;
+  /* 21% */
+}
+
 /* Settings */
 
 .settings {
