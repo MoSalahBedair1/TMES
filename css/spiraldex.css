@@ -616,6 +616,15 @@ body {
   text-align: center;
   width: 68px;
   margin-right: 6px;
+  border-radius: 5px;
+  outline: transparent;
+  border: 1px solid transparent;
+}
+
+.form .from-to .from-hours,
+.form .from-to .from-minutes,
+.form .from-to .from-seconds {
+  margin-top: 4px;
 }
 
 .add {
@@ -1288,4 +1297,11 @@ body {
   background-color: #000;
   opacity: 0;
   transition: 0.5s;
+}
+
+.fill1-circle3,
+.fill2-circle3,
+.fill3-circle3,
+.fill4-circle3 {
+  cursor: pointer;
 }
