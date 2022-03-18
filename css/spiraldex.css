@@ -7,16 +7,67 @@
 body {
   height: 100vh;
   font-family: sans-serif;
+  background-color: #F4F4F4;
+  /* overflow: hidden; */
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Start navbar section */
+
+.navbar {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.brand-name {
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  align-self: center;
+  font-size: 30px;
+  color: white;
+  letter-spacing: 5px;
+}
+
+
+/* End navbar section */
+
+/* Start Live Clock Section */
+
+.date-time {
+  position: absolute;
+  width: 713px;
+  height: 35px;
+  background-color: rebeccapurple;
+  text-align: center;
+  line-height: 35px;
+  color: white;
+  font-size: 25px;
+  display: flex;
+  justify-content: space-around;
+}
+
+
+/* End Live Clock Section */
+
+/* Start Main Container */
+
+/* End Main Container */
 
 /* Spirladex Section */
 
 .time {
   width: 708px;
-  height: 708px;
-  border: 4px dashed #ccc;
+  height: 700px;
+  /* border: 4px dashed #ccc; */
   display: inline-block;
-  margin: 20px 30px 20px 20px;
+  /* margin: 20px 30px 20px 20px; */
   position: relative;
 }
 
@@ -532,11 +583,12 @@ body {
 
 .control-panel {
   display: inline-block;
-  width: 708px;
   height: 708px;
+  width: 740px;
   background-color: #ccc;
-  margin: 20px 20px 20px 28px;
+  /* margin: 20px 20px 20px 28px; */
   position: relative;
+  /* left: 100%; */
 }
 
 .form {

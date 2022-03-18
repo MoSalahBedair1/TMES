@@ -15,8 +15,26 @@
     <script src="js/momentum.js"></script>
   </head>
   <body>
+    <!-- Start navbar section -->
+    <nav class="navbar" style="background-color:#0275d8;">
+        <a class="brand-name" href="#">T.M.E.S</a>
+    </nav>
+    <!-- End navbar section -->
+    <!-- Start Live Clock Section -->
+    <div class="date-time">
+      <div>
+        <span>Current Time:</span>
+        <span id="span"></span>
+      </div>
+      <div>
+        <span>Current Date:</span>
+        <span id="date"></span>
+      </div>
+
+    </div>
+    <!-- End Live Clock Section -->
     <!-- Start Spiraldex Section -->
-    <div class="time">
+    <div class="time" id="time">
       <div class="spiraldex">
         <div class="clock-arrow-3-5"></div>
         <div class="clock-arrow-4-6"></div>
@@ -151,13 +169,9 @@
       </form>
     </div>
     <!-- End Control Panel Section -->
-
-    <span id="span"></span>
-    <div>
-      <canvas id="myChart"></canvas>
-    </div>
     <!-- jquery -->
     <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/functionality.js"></script>
   </body>
 </html>

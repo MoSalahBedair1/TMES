@@ -1,5 +1,11 @@
 $(function () {
 
+  // var timeSectionWidth = document.getElementById('time').getBoundingClientRect().width;
+
+  // $('.control-panel').css('width',`calc(100% - (${timeSectionWidth}px))`);
+
+// $('.control-panel').style.width = ;
+
 /* === Start Spiraldex Section === */
 /* Start creating circles halfs */
 class Circle {
@@ -46,10 +52,13 @@ new Circle('circle6', '30', false);
 /* Start live clock section */
 var
 span = document.getElementById('span'),
+date = document.getElementById('date'),
 trackerSpan = document.getElementById('tracker'),
 currenctSession = document.getElementById('current-session'),
 sessionsRemaining = document.getElementById('sessions-remaining'),
 d,h,m,s,t,
+month, day,
+currentDate,
 tSDegree,
 tMDegree,
 tHDegree,
@@ -73,6 +82,11 @@ class TDegree {
     h = d.getHours();
     m = d.getMinutes();
     s = d.getSeconds();
+
+    month = d.getMonth()+1;
+    day = d.getDate();
+
+    currentDate = (day<10 ? '0' : '') + day + '/' +  (month<10 ? '0' : '') + month + '/' + d.getFullYear();
 
     tHDegree = h * 30;
     tMDegree = m * 0.5;
@@ -142,7 +156,8 @@ function time() {
 
   t = `${h < 10 ? '0' : ''}${h}:${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
 
-  span.textContent = t
+  span.textContent = t;
+  date.textContent = currentDate;
 
 };
 
@@ -641,12 +656,16 @@ $('.go-btn').click(function () {
 
   if (tDegree <= 180) { // Starts At Circle 3
     circle3Add.circle3StartTrack();
+    new Circle3FillInfo(num);
   } else  if (tDegree > 180 && tDegree <= 360) { // Starts At Circle 4
     circle4Add.circle4StartTrack();
+    new Circle4FillInfo(num);
   } else if (tDegree > 360 && tDegree <= 540) { // Starts At Circle 5
     circle5Add.circle5StartTrack();
+    new Circle5FillInfo(num);
   } else if (tDegree > 540 && tDegree <= 720) { // Starts At Circle 6
     circle6Add.circle6StartTrack();
+    new Circle6FillInfo(num);
   }
 
   if ($('#tracker').is(':visible')) {
@@ -737,7 +756,6 @@ $('.go-btn').click(function () {
           tracking();
 
           if ((trackedSeconds / 60) + trackedMinutes + (trackedHours * 60) == shortBreak) {
-            new Circle3FillInfo(num);
             num++
             clearInterval(breakTracker3);
 
